@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{80
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{EA3F1D24-EBF1-4BB1-98FC-D140A352ECDB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E0C2E2A-384A-451D-A2E3-00C84C3DC02B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{3E0C2E2A-384A-451D-A2E3-00C84C3DC02B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
