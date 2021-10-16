@@ -12,7 +12,9 @@ namespace DYHVN3_HFT_2021221.Data
     public class PCDbContext : DbContext 
     {
         private string ConnectionString { get { return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True"; } }
-        public virtual DbSet<Motherboard> PCs{ get; set; }
+        public virtual DbSet<Motherboard> Motherboards{ get; set; }
+        public virtual DbSet<CPU> CPUs { get; set; }
+        public virtual DbSet<RAM> RAMs { get; set; }
         public PCDbContext()
         {
             this.Database.EnsureCreated();
