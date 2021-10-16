@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class RAMRepository
+    class RAMRepository : IRAMRepository
     {
         PCDbContext db;
         public RAMRepository(PCDbContext db)

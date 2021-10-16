@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class CPURepository
+    class CPURepository : ICPURepository
     {
         PCDbContext db;
         public CPURepository(PCDbContext db)

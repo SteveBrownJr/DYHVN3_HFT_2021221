@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class MotherboardRepository
+    class MotherboardRepository : IMotherboardRepository
     {
         PCDbContext db;
         public MotherboardRepository(PCDbContext db)
