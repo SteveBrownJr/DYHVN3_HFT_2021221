@@ -49,18 +49,19 @@ namespace DYHVN3_HFT_2021221.Data
 
             Distributor PCX = new Distributor() { Distributor_Id = 1, Name = "PCX", Country = "Hungary" };
             Distributor EBay = new Distributor() { Distributor_Id = 2, Name = "EBay", Country = "America" };
+            Distributor Amazon = new Distributor() { Distributor_Id = 3, Name = "Amazon", Country = "Hungary" };
 
             Manufacturer Intel = new Manufacturer() { Manufacturer_Id = 1, Name = "Intel", colour = "Blue", DistributorId = PCX.Distributor_Id };
             Manufacturer AMD = new Manufacturer() { Manufacturer_Id = 2, Name = "AMD", colour = "Red", DistributorId = PCX.Distributor_Id };
             Manufacturer ARM = new Manufacturer() { Manufacturer_Id = 3, Name = "ARM", colour = "Black", DistributorId = EBay.Distributor_Id };
 
-            Modell R51600X = new Modell() {Modell_Id=1, Name="1600X", ClockSpeed=3600, Family="Ryzen", HyperThreading = true, Cores=6,ManufacturerId=AMD.Manufacturer_Id  };
-            Modell R51800X = new Modell() { Modell_Id = 2, Name = "1800X", ClockSpeed = 3700, Family = "Ryzen", HyperThreading = true, Cores = 8, ManufacturerId = AMD.Manufacturer_Id };
+            Modell R51600X = new Modell() {Modell_Id=1, Name="1600X", ClockSpeed=3600, Family="Ryzen", HyperThreading = true, Cores=6,ManufacturerId=AMD.Manufacturer_Id,Value=200  };
+            Modell R51800X = new Modell() { Modell_Id = 2, Name = "1800X", ClockSpeed = 3700, Family = "Ryzen", HyperThreading = true, Cores = 8, ManufacturerId = AMD.Manufacturer_Id,Value=399 };
 
-            Modell i77700k = new Modell() { Modell_Id = 3, Name = "i7 7700k", ClockSpeed = 4100, Family = "Core", Cores = 4,HyperThreading=true, ManufacturerId = Intel.Manufacturer_Id };
-            Modell i99950k = new Modell() { Modell_Id = 4, Name = "i9 99950k", ClockSpeed = 4000, Family = "Core", Cores = 8, HyperThreading = true, ManufacturerId = Intel.Manufacturer_Id };
+            Modell i77700k = new Modell() { Modell_Id = 3, Name = "i7 7700k", ClockSpeed = 4100, Family = "Core", Cores = 4,HyperThreading=true, ManufacturerId = Intel.Manufacturer_Id,Value=699 };
+            Modell i99950k = new Modell() { Modell_Id = 4, Name = "i9 99950k", ClockSpeed = 4000, Family = "Core", Cores = 8, HyperThreading = true, ManufacturerId = Intel.Manufacturer_Id,Value=1999 };
 
-            modelBuilder.Entity<Distributor>().HasData(PCX, EBay);
+            modelBuilder.Entity<Distributor>().HasData(PCX, EBay,Amazon);
             modelBuilder.Entity<Manufacturer>().HasData(Intel, AMD,ARM);
             modelBuilder.Entity<Modell>().HasData(R51600X,R51800X,i77700k,i99950k);
         }

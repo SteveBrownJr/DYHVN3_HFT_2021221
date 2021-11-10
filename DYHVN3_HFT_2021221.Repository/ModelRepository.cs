@@ -47,7 +47,8 @@ namespace DYHVN3_HFT_2021221.Repository
             modellToUpdate.Cores = modell.Cores;
             modellToUpdate.Family = modell.Family;
             modellToUpdate.HyperThreading = modell.HyperThreading;
-            modellToUpdate.Name = modellToUpdate.Name;
+            modellToUpdate.Name = modell.Name;
+            modellToUpdate.Value = modell.Value;
             db.SaveChanges();
         }
 

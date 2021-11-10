@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    interface IModelRepository
+    public interface IModelRepository
     {
         void Create(Modell model);
         void Delete(int id);

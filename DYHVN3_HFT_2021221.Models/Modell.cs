@@ -14,6 +14,7 @@ namespace DYHVN3_HFT_2021221.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Modell_Id { get; set; }
         public string Family { get; set; }
+        public int Value { get; set; }
         public string Name { get; set; }
         public int ClockSpeed { get; set; }
         public int Cores { get; set; }

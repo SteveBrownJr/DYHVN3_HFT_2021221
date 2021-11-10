@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    interface IDistributorRepository
+    public interface IDistributorRepository
     {
         void Create(Distributor Distributor);
         void Delete(int id);

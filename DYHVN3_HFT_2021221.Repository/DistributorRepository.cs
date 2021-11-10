@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class DistributorRepository : IDistributorRepository
+    public class DistributorRepository : IDistributorRepository
     {
         PCDbContext db;
         public DistributorRepository(PCDbContext db)

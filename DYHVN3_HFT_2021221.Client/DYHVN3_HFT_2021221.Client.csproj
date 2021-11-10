@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DYHVN3_HFT_2021221.Data\DYHVN3_HFT_2021221.Data.csproj" />
     <ProjectReference Include="..\DYHVN3_HFT_2021221.Models\DYHVN3_HFT_2021221.Models.csproj" />
   </ItemGroup>
 
