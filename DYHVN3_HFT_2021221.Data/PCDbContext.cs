@@ -47,9 +47,9 @@ namespace DYHVN3_HFT_2021221.Data
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            Distributor PCX = new Distributor() { Distributor_Id = 1, Name = "PCX", Country = "Hungary" };
-            Distributor EBay = new Distributor() { Distributor_Id = 2, Name = "EBay", Country = "America" };
-            Distributor Amazon = new Distributor() { Distributor_Id = 3, Name = "Amazon", Country = "Hungary" };
+            Distributor PCX = new Distributor() { Distributor_Id = 1, Name = "PCX", Country = "Hungary",EmployeeNumber=30 };
+            Distributor EBay = new Distributor() { Distributor_Id = 2, Name = "EBay", Country = "America",EmployeeNumber=int.MaxValue };
+            Distributor Amazon = new Distributor() { Distributor_Id = 3, Name = "Amazon", Country = "Hungary",EmployeeNumber=int.MaxValue };
 
             Manufacturer Intel = new Manufacturer() { Manufacturer_Id = 1, Name = "Intel", colour = "Blue", DistributorId = PCX.Distributor_Id };
             Manufacturer AMD = new Manufacturer() { Manufacturer_Id = 2, Name = "AMD", colour = "Red", DistributorId = PCX.Distributor_Id };

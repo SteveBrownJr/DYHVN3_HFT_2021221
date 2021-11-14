@@ -15,6 +15,7 @@ namespace DYHVN3_HFT_2021221.Models
         public int Manufacturer_Id { get; set; }
         public string Name { get; set; }
         public string colour { get; set; }
+        public int EmployeeNumber { get; set; }
         public virtual Distributor Distributor { get; set; }
         [NotMapped]
         public virtual ICollection<Modell> Modells { get; set; }

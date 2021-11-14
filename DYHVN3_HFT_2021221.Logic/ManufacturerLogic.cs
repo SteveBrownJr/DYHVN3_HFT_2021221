@@ -58,6 +58,17 @@ namespace DYHVN3_HFT_2021221.Logic
                 return m.ClockSpeed * m.Cores * 2;
             return m.Cores * m.ClockSpeed;
         }
-
+        public double AVGNumberOfEmployees()
+        {
+            return ManufacturerRepo.GetAll().Average(t => t.EmployeeNumber);
+        }
+        public int NumberOfEmployees(int id)
+        {
+            return ManufacturerRepo.Read(id).EmployeeNumber;
+        }
+        public int GetIdFromName(string name)
+        {
+            return ManufacturerRepo.GetAll().FirstOrDefault(t => t.Name == name).DistributorId;
+        }
     }
 }

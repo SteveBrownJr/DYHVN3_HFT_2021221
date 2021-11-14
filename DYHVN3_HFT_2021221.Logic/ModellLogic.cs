@@ -53,11 +53,26 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             return ModelRepo.GetAll().OrderByDescending(t=>relativeSpeed(t)).FirstOrDefault();
         }
-        private int relativeSpeed(Modell m)
+        public int relativeSpeed(Modell m)
         {
             if (m.HyperThreading)
                 return m.ClockSpeed * m.Cores * 2;
             return m.Cores * m.ClockSpeed;
         }
+        public double AVGNumberOfCores()
+        {
+            return ModelRepo.GetAll().Average(t=> t.Cores);
+        }
+        public double AVGPrice()
+        {
+            return ModelRepo.GetAll().Average(t => t.Value);
+        }
+        public IEnumerable<Modell> AllnonHTCPU()
+        {
+            return ModelRepo.GetAll().Where(t => t.HyperThreading);
+        }
+
+
+
     }
 }

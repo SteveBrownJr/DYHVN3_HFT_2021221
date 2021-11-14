@@ -45,7 +45,7 @@ namespace DYHVN3_HFT_2021221.Repository
             var ManufacturerToUpdate = Read(Manufacturer.Manufacturer_Id);
             ManufacturerToUpdate.colour = Manufacturer.colour;
             ManufacturerToUpdate.Name = Manufacturer.Name;
-
+            ManufacturerToUpdate.EmployeeNumber = Manufacturer.EmployeeNumber;
             db.SaveChanges();
         }
     }
