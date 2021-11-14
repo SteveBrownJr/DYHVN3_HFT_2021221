@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class ModelRepository : IModelRepository
+    public class ModelRepository : IModelRepository
     {
         PCDbContext db;
         public ModelRepository(PCDbContext db)
