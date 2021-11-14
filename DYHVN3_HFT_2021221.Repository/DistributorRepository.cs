@@ -45,6 +45,7 @@ namespace DYHVN3_HFT_2021221.Repository
             var DistributorToUpdate = Read(Distributor.Distributor_Id);
             DistributorToUpdate.Country = Distributor.Country;
             DistributorToUpdate.Name = Distributor.Name;
+            DistributorToUpdate.EmployeeNumber = Distributor.EmployeeNumber;
 
             db.SaveChanges();
         }

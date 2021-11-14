@@ -61,7 +61,14 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             return distributorRepo.Read(id).Manufacturers.Count();
         }
-        
+        public int NumberOfEmployees(int id)
+        {
+            return distributorRepo.Read(id).EmployeeNumber;
+        }
+        public double AVGNumberOfEmployees()
+        {
+            return distributorRepo.GetAll().Average(t => t.EmployeeNumber);
+        }
 
     }
 }
