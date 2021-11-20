@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Logic
 {
-    class ModellLogic
+    public class ModellLogic
     {
         IModelRepository ModelRepo;
         public ModellLogic(IModelRepository ModelRepo)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Logic
 {
-    class ManufacturerLogic
+    public class ManufacturerLogic
     {
         IManufacturerRepository ManufacturerRepo;
         public ManufacturerLogic(IManufacturerRepository ManufacturerRepo)
