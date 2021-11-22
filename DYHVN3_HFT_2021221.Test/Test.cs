@@ -156,7 +156,16 @@ namespace DYHVN3_HFT_2021221.Test
         [Test]
         public void Test5()
         {
-            Assert.That(mdl.MostPowerFul().Name == "r8");
+            var modells = mdl.ReadAll();
+            Modell max = modells.ElementAt(1);
+            for (int i = 0; i < modells.Count(); i++)
+            {
+                if (mdl.relativeSpeed(max)<mdl.relativeSpeed(modells.ElementAt(i)))
+                {
+                    max = modells.ElementAt(i);
+                }
+            }
+            Assert.That(mdl.MostPowerFul().Name == max.Name);
         }
     }
 }
