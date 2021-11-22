@@ -98,5 +98,25 @@ namespace DYHVN3_HFT_2021221.Test
             mockDistributorRepository.Setup((t) => t.GetAll()).Returns(fakeDistributorList.AsQueryable);
             dfl = new DistributorLogic(mockDistributorRepository.Object);
         }
+        [Test]
+        public void Test1()
+        {
+           
+        }
+        [Test]
+        public void Test2()
+        {
+
+        }
+        [Test]
+        public void Test3()
+        {
+            
+        }
+        [Test]
+        public void Test5()
+        {
+        
+        }
     }
 }
