@@ -15,7 +15,10 @@ namespace DYHVN3_HFT_2021221.Test
     {
         
         DistributorLogic dfl;
+
         ModellLogic mdl;
+        List<Modell> FakeModellList;
+
         [SetUp]
         public void Init()
         {
@@ -103,7 +106,7 @@ namespace DYHVN3_HFT_2021221.Test
             FakeModells.Add(fakeIntelModells[1]);
             FakeModells.Add(fakeAMDModells[0]);
             FakeModells.Add(fakeAMDModells[1]);
-
+            FakeModellList = FakeModells;
             var mockModellsRepository = new Mock<IModelRepository>();
             mockModellsRepository.Setup((t) => t.GetAll()).Returns(FakeModells.AsQueryable);
 
@@ -130,7 +133,14 @@ namespace DYHVN3_HFT_2021221.Test
         [Test]
         public void Test3()
         {
-            
+            double q3 = mdl.AVGNumberOfCores();
+            double v = 0;
+            int i = 0;
+            for (i = 0; i < FakeModellList.Count(); i++)
+            {
+                v += FakeModellList.ElementAt(i).Cores;
+            }
+            Assert.That(q3.Equals(v / i));
         }
         [Test]
         public void Test4()
