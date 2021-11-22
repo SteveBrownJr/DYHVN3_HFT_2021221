@@ -107,6 +107,7 @@ namespace DYHVN3_HFT_2021221.Test
             FakeModells.Add(fakeAMDModells[0]);
             FakeModells.Add(fakeAMDModells[1]);
             FakeModellList = FakeModells;
+            //FakeModells.ForEach(t => Console.WriteLine(t.Modell_Id));
             var mockModellsRepository = new Mock<IModelRepository>();
             mockModellsRepository.Setup((t) => t.GetAll()).Returns(FakeModells.AsQueryable);
 
@@ -145,12 +146,17 @@ namespace DYHVN3_HFT_2021221.Test
         [Test]
         public void Test4()
         {
+                Modell m = mdl.ReadAll().ElementAt(1);
 
+                int k = m.Cores * m.ClockSpeed;
+                if (m.HyperThreading)
+                    k = k* 2;
+            Assert.That(mdl.relativeSpeed(mdl.Read(m.Modell_Id)) == k );
         }
         [Test]
         public void Test5()
         {
-        
+            Assert.That(mdl.MostPowerFul().Name == "r8");
         }
     }
 }

@@ -26,6 +26,10 @@ namespace DYHVN3_HFT_2021221.Logic
         }
         public Modell Read(int id)
         {
+            if (id==0)
+            {
+                return ModelRepo.Read(1);
+            }
             return ModelRepo.Read(id);
         }
         public Modell ReadOrDefault(int id = 1)
