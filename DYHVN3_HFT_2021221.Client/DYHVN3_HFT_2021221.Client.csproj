@@ -6,7 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DYHVN3_HFT_2021221.Data\DYHVN3_HFT_2021221.Data.csproj" />
+    <ProjectReference Include="..\DYHVN3_HFT_2021221.Endpoint\DYHVN3_HFT_2021221.Endpoint.csproj" />
+    <ProjectReference Include="..\DYHVN3_HFT_2021221.Logic\DYHVN3_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\DYHVN3_HFT_2021221.Models\DYHVN3_HFT_2021221.Models.csproj" />
+    <ProjectReference Include="..\DYHVN3_HFT_2021221.Repository\DYHVN3_HFT_2021221.Repository.csproj" />
+    <ProjectReference Include="..\DYHVN3_HFT_2021221.Test\DYHVN3_HFT_2021221.Test.csproj" />
   </ItemGroup>
 
 </Project>

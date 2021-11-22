@@ -15,7 +15,7 @@ namespace DYHVN3_HFT_2021221.Test
     {
         
         DistributorLogic dfl;
-        
+        ModellLogic mdl;
         [SetUp]
         public void Init()
         {
@@ -79,6 +79,7 @@ namespace DYHVN3_HFT_2021221.Test
                     Value = 800
                 }
             };
+
             fakeAMDManufacturer.Modells = fakeAMDModells;
             fakeIntelManufacturer.Modells = fakeIntelModells;
             fakeAMDManufacturer.Name = "AMD";
@@ -96,22 +97,45 @@ namespace DYHVN3_HFT_2021221.Test
             var fakeDistributorList = new List<Distributor>();
             fakeDistributorList.Add(fakeDistributor);
             mockDistributorRepository.Setup((t) => t.GetAll()).Returns(fakeDistributorList.AsQueryable);
+            
+            List<Modell> FakeModells = new List<Modell>();
+            FakeModells.Add(fakeIntelModells[0]);
+            FakeModells.Add(fakeIntelModells[1]);
+            FakeModells.Add(fakeAMDModells[0]);
+            FakeModells.Add(fakeAMDModells[1]);
+
+            var mockModellsRepository = new Mock<IModelRepository>();
+            mockModellsRepository.Setup((t) => t.GetAll()).Returns(FakeModells.AsQueryable);
+
+            mdl = new ModellLogic(mockModellsRepository.Object);
             dfl = new DistributorLogic(mockDistributorRepository.Object);
         }
         [Test]
         public void Test1()
         {
-           
+            dfl.Delete(1);
+            Assert.Throws<NullReferenceException>(()=>dfl.Read(1).Equals(null));
+            
         }
         [Test]
         public void Test2()
         {
-
+            var q2=mdl.AllnonHTCPU();
+            for (int i = 0; i < q2.Count(); i++)
+            {
+                Console.WriteLine(q2.ElementAt(i).HyperThreading);
+            }
+            Assert.That((q2.Where(t=>t.HyperThreading).Count())==0);
         }
         [Test]
         public void Test3()
         {
             
+        }
+        [Test]
+        public void Test4()
+        {
+
         }
         [Test]
         public void Test5()

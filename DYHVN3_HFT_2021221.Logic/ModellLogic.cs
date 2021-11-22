@@ -69,7 +69,7 @@ namespace DYHVN3_HFT_2021221.Logic
         }
         public IEnumerable<Modell> AllnonHTCPU()
         {
-            return ModelRepo.GetAll().Where(t => t.HyperThreading);
+            return ModelRepo.GetAll().Where(t => t.HyperThreading==false);
         }
 
 
