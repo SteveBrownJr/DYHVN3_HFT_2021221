@@ -21,6 +21,10 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Wagon Wagon)
         {
+            if (Wagon.Locomotive_Id==0||Wagon.Wagon_Id==0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             Locomotive l = LocomotiveRepo.GetAll().FirstOrDefault(t=>t.Locomotive_Id==Wagon.Locomotive_Id);
             if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
             {

@@ -22,7 +22,7 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Locomotive locomotive)
         {
-            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 4 || locomotive.Staff < 1)
+            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 3 || locomotive.Staff < 1)
                 throw new ArgumentOutOfRangeException();
             locomotive.load = 0;
             locomotiveRepo.Create(locomotive);

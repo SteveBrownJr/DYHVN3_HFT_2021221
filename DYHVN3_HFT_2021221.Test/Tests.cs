@@ -200,5 +200,26 @@ namespace DYHVN3_HFT_2021221.Test
             Assert.That(t.Equals(e));
         }
 
+        [Test]
+        public void LocomotiveCreateTest()
+        {
+            Locomotive l = new Locomotive() { Name = "Albert", Type = "D", Staff = 5, Starting_Torque = 510 };
+            
+            Assert.Throws<ArgumentOutOfRangeException>(() => locomotiveLogic.Create(l));
+        }
+        [Test]
+        public void WagonCreateTest()
+        {
+            Wagon w = new Wagon() { CargoType = Cargo_Type.Hopper, Wagon_Id = 0, Locomotive_Id = 0, Quantity = 200 };
+            
+            Assert.Throws<ArgumentOutOfRangeException>(()=>wagonLogic.Create(w));
+        }
+        [Test]
+        public void StationCreateTest()
+        {
+            Station s = new Station() { Locomotive_Id = 0, x_cordinate = 0, y_cordinate = 0, Name = "Afganistan" };
+
+            Assert.Throws<ArgumentOutOfRangeException>(()=>stationLogic.Create(s));
+        }
     }
 }
