@@ -11,10 +11,13 @@ namespace DYHVN3_HFT_2021221.Logic
     public class LocomotiveLogic : ILocomotiveLogic
     {
         ILocomotiveRepository locomotiveRepo;
-
-        public LocomotiveLogic(ILocomotiveRepository locomotiveRepo)
+        IStationRepository StationRepo;
+        IWagonRepository WagonRepo;
+        public LocomotiveLogic(ILocomotiveRepository locomotiveRepo,IStationRepository StationRepo,IWagonRepository WagonRepo)
         {
             this.locomotiveRepo = locomotiveRepo;
+            this.StationRepo = StationRepo;
+            this.WagonRepo = WagonRepo;
         }
 
         public void Create(Locomotive locomotive)
@@ -29,13 +32,22 @@ namespace DYHVN3_HFT_2021221.Logic
         }
 
         public IEnumerable<Locomotive> ReadAll()
-        {
+        { 
             return locomotiveRepo.GetAll();
         }
 
         public void Delete(int id)
         {
-            locomotiveRepo.Delete(id);
+            try
+            {
+                locomotiveRepo.Delete(id);
+            }
+            catch (Exception)
+            {
+                //Mivel a vagonoknak és az állomásoknak idegen kulcsa a mozdony elsődleges kulcsa
+                //ezért mindig hibára fogunk futni, ha olyan mozdonyt akarunk törölni aminek még vannak ilyen
+                //vagy olyan függőségei ezért van itt ez a try{}catch blokk
+            }
         }
         public void Update(Locomotive l)
         {

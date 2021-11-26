@@ -22,10 +22,10 @@ namespace DYHVN3_HFT_2021221.Logic
         public void Create(Wagon Wagon)
         {
             Locomotive l = LocomotiveRepo.GetAll().FirstOrDefault(t=>t.Locomotive_Id==Wagon.Locomotive_Id);
-            if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
+            /*if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
-            }
+            }*/
             l.load += Wagon.Quantity;
             LocomotiveRepo.Update(l);
             WagonRepo.Create(Wagon);
@@ -47,6 +47,14 @@ namespace DYHVN3_HFT_2021221.Logic
         }
         public void Update(Wagon w)
         {
+            Locomotive connect = LocomotiveRepo.Read(w.Locomotive_Id);
+            connect.load += w.Quantity;
+            LocomotiveRepo.Update(connect);
+
+            Locomotive disconnect = LocomotiveRepo.Read(WagonRepo.Read(w.Wagon_Id).Locomotive_Id);
+            disconnect.load -= w.Quantity;
+            LocomotiveRepo.Update(disconnect);
+            
             WagonRepo.Update(w);
         }
         //non-crud

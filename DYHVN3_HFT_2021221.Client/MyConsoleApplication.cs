@@ -352,6 +352,7 @@ namespace DYHVN3_HFT_2021221.Client
             Console.WriteLine("(7)  Show the Locmotive of the specific station");
             Console.WriteLine("(8)  Show the wagons of the specific station");
             Console.WriteLine("(9)  How much cargo travel through a specific station");
+            Console.WriteLine("(10) What type of cargo travel through a specific station");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
@@ -445,18 +446,18 @@ namespace DYHVN3_HFT_2021221.Client
                     {
                         Console.WriteLine("Station: ");
                         int id = int.Parse(Console.ReadLine());
-                        Locomotive l = rest.Get<Locomotive>(id, "touchinglocomotive");
+                        Locomotive l = rest.Get<Locomotive>(id, "train/touchinglocomotive");
                         Console.WriteLine("id\tname\ttype\tstart torq\tstaff\tload");
                         Console.WriteLine(l.Locomotive_Id + "\t" + l.Name + "\t" + l.Type + "\t" + l.Starting_Torque + "\t\t" + l.Staff + "\t" + l.load + "kg");
                         Console.ReadKey();
                         break;
                     }
-                case 8:
+                case 8://nem mukodik
                     {
                         Console.Clear();
                         Console.WriteLine("Station: ");
                         int id = int.Parse(Console.ReadLine());
-                        var Wagons = rest.Get2<Wagon>(id, "touchingwagons");
+                        var Wagons = rest.Get2<Wagon>(id, "train/touchingwagons");
                         Console.WriteLine("Id\tCargoType\tQuantity\tLocomotive Id");
                         foreach (Wagon w in Wagons)
                         {
@@ -469,13 +470,22 @@ namespace DYHVN3_HFT_2021221.Client
                     {
                         Console.WriteLine("Station id:");
                         int id = int.Parse(Console.ReadLine());
-                        double d = rest.Get<double>(id, "movedquantity");
+                        double d = rest.Get<double>(id, "train/movedquantity");
                         Console.WriteLine(Math.Round(d,2)+"kg");
                         Console.ReadKey();
                         break;
                     }
                 case 10:
                     {
+                        Console.WriteLine("Station id:");
+                        int id = int.Parse(Console.ReadLine());
+                        List<Cargo_Type> collection = rest.Get2<Cargo_Type>(id, "train/movedcargotypes");
+                        Console.WriteLine("Cargo types:");
+                        foreach (var item in collection)
+                        {
+                            Console.WriteLine(item.ToString()+" ");
+                        }
+                        Console.ReadKey();
                         break;
                     }
             }

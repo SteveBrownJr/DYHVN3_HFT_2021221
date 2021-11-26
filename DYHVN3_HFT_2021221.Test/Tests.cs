@@ -72,9 +72,9 @@ namespace DYHVN3_HFT_2021221.Test
             mockWagonRepository.Setup((t) => t.GetAll()).Returns(fakeWagons.AsQueryable());
             for (int i = 1; i <= fakeWagons.Count; i++)
                 mockWagonRepository.Setup((t) => t.Read(i)).Returns(fakeWagons[i - 1]);
-            locomotiveLogic = new LocomotiveLogic(mockLocomotiveRepository.Object);
+            locomotiveLogic = new LocomotiveLogic(mockLocomotiveRepository.Object, mockStationRepository.Object, mockWagonRepository.Object);
             wagonLogic = new WagonLogic(mockWagonRepository.Object,mockLocomotiveRepository.Object);
-            stationLogic = new StationLogic(mockStationRepository.Object);
+            stationLogic = new StationLogic(mockStationRepository.Object, mockLocomotiveRepository.Object, mockWagonRepository.Object);
         }
 
         [Test]
@@ -118,7 +118,7 @@ namespace DYHVN3_HFT_2021221.Test
         public void TouchinWagonsTest()
         {
             //Act
-            ICollection<Wagon> t = stationLogic.TouchingWagons(1);
+            IEnumerable<Wagon> t = stationLogic.TouchingWagons(1);
 
             //Expected
             ICollection<Wagon> e = new Collection<Wagon>();

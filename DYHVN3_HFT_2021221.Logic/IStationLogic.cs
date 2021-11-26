@@ -13,7 +13,7 @@ namespace DYHVN3_HFT_2021221.Logic
         Station Read(int id);
         IEnumerable<Station> ReadAll();
         Locomotive TouchingLocomotive(int sid);
-        ICollection<Wagon> TouchingWagons(int sid);
+        IEnumerable<Wagon> TouchingWagons(int sid);
         void Update(Station l);
     }
 }

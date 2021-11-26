@@ -11,10 +11,13 @@ namespace DYHVN3_HFT_2021221.Logic
     public class StationLogic : IStationLogic
     {
         IStationRepository StationRepo;
-
-        public StationLogic(IStationRepository StationRepo)
+        ILocomotiveRepository LocomotiveRepo;
+        IWagonRepository WagonRepo;
+        public StationLogic(IStationRepository StationRepo, ILocomotiveRepository LocomotiveRepo, IWagonRepository WagonRepo)
         {
             this.StationRepo = StationRepo;
+            this.LocomotiveRepo = LocomotiveRepo;
+            this.WagonRepo = WagonRepo;
         }
 
         public void Create(Station Station)
@@ -51,12 +54,13 @@ namespace DYHVN3_HFT_2021221.Logic
         public Locomotive TouchingLocomotive(int sid) //Controllerbe implementálva
         {
             Station s = Read(sid);
-            return s.locomotive;
+
+            return LocomotiveRepo.Read(s.Locomotive_Id);
         }
-        public ICollection<Wagon> TouchingWagons(int sid)//Controllerbe implementálva
+        public IEnumerable<Wagon> TouchingWagons(int sid)//Controllerbe implementálva
         {
             Station s = Read(sid);
-            return s.locomotive.Wagons;
+            return WagonRepo.GetAll().Where(wagon=>(wagon.Locomotive_Id==s.Locomotive_Id));
         }
 
         public double MovedQuantity(int sid)//Controllerbe implementálva
@@ -67,7 +71,7 @@ namespace DYHVN3_HFT_2021221.Logic
         public IEnumerable<Cargo_Type> MovedCargoTypes(int sid)//Controllerbe implementálva
         {
             Station s = Read(sid);
-            return s.locomotive.Wagons.Select(wagon => wagon.CargoType);
+            return s.locomotive.Wagons.Select(wagon => wagon.CargoType).Distinct();
         }
     }
 }

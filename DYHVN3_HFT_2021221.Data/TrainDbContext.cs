@@ -40,7 +40,7 @@ namespace DYHVN3_HFT_2021221.Data
                 .HasForeignKey(station => station.Locomotive_Id)
                 .OnDelete(DeleteBehavior.Restrict);
             });
-            modelBuilder.Entity<Wagon>(entity => 
+            modelBuilder.Entity<Wagon>(entity =>
             {
                 entity
                 .HasOne(wagon => wagon.locomotive)
@@ -49,15 +49,13 @@ namespace DYHVN3_HFT_2021221.Data
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            
 
-            Locomotive Gunhild = new Locomotive() { Name = "Gunhild", Locomotive_Id = 1, Staff = 1, Type = "NoHab", Starting_Torque = 292 };//Kárpát vasút mozdonya
-            Locomotive Fecske = new Locomotive() { Name = "Fecske", Locomotive_Id = 2, Staff = 1, Type = "Szili", Starting_Torque = 270 }; //MÁV szilícium egyenirányítós mozdonyának egyik szériájának darabja
-            Locomotive Repcebika = new Locomotive() { Name = "Repcebika", Locomotive_Id = 3, Staff = 2, Type = "Taurus", Starting_Torque = 300 };//A GySEV mozdonya
-            Locomotive Doremi = new Locomotive() { Name = "Doremi", Locomotive_Id = 4, Staff = 2, Type = "Taurus", Starting_Torque = 300 };//MÁV mozdonya, szolmizál induláskor
-            Locomotive KisLeo = new Locomotive() { Name = "Kisleo", Locomotive_Id = 5, Staff = 3, Type = "ShuntingLocomotive", Starting_Torque = 230 };
-
-            modelBuilder.Entity<Locomotive>().HasData(Gunhild, Fecske, Repcebika, Doremi, KisLeo);
+            List<Locomotive> locomotives = new List<Locomotive>();
+            locomotives.Add(new Locomotive() { Name = "Gunhild", Locomotive_Id = 1, Staff = 1, Type = "NoHab", Starting_Torque = 292 });
+            locomotives.Add(new Locomotive() { Name = "Fecske", Locomotive_Id = 2, Staff = 1, Type = "Szili", Starting_Torque = 270 }); 
+            locomotives.Add(new Locomotive() { Name = "Repce", Locomotive_Id = 3, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
+            locomotives.Add(new Locomotive() { Name = "Doremi", Locomotive_Id = 4, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
+            locomotives.Add(new Locomotive() { Name = "Kisleo", Locomotive_Id = 5, Staff = 3, Type = "V41", Starting_Torque = 230 });
 
             List<Wagon> addable_wagons = new List<Wagon>() {
             new Wagon() { Locomotive_Id = 1, Quantity = 60, Wagon_Id = 1 },
@@ -94,7 +92,11 @@ namespace DYHVN3_HFT_2021221.Data
             new Wagon() { Locomotive_Id = 2, CargoType = Cargo_Type.Mail, Quantity = 10000, Wagon_Id = 29 },
             new Wagon() { Locomotive_Id = 2, CargoType = Cargo_Type.Mail, Quantity = 10000, Wagon_Id = 30 },
         };
-
+            for (int i = 0; i < addable_wagons.Count(); i++)
+            {
+                locomotives[addable_wagons[i].Locomotive_Id - 1].load += addable_wagons[i].Quantity;
+            }
+            modelBuilder.Entity<Locomotive>().HasData(locomotives[0], locomotives[1], locomotives[2], locomotives[3], locomotives[4]);
             modelBuilder.Entity<Wagon>().HasData(addable_wagons);
 
             List<Station> addable_stations = new List<Station>() {
