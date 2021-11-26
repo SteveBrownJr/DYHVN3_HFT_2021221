@@ -10,7 +10,7 @@ namespace DYHVN3_HFT_2021221.Client
     {
         static void Main(string[] args)
         {
-            TrainDbContext db = new TrainDbContext();
+            
             
 
         }

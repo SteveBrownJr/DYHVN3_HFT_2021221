@@ -19,6 +19,7 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Locomotive locomotive)
         {
+            locomotive.load = 0;
             locomotiveRepo.Create(locomotive);
         }
 

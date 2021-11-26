@@ -24,6 +24,7 @@ namespace DYHVN3_HFT_2021221.Logic
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
             }
+            l.load += Wagon.Quantity;
             WagonRepo.Create(Wagon);
         }
 

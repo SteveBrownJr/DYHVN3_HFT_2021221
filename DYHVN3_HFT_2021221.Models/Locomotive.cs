@@ -17,15 +17,7 @@ namespace DYHVN3_HFT_2021221.Models
         public string Type { get; set; }//A mozdony típusa, ám a típus becenevét fogom megadni, hogy színesebb legyen a feladat
         public int Staff { get; set; }//A vezérek száma akik a mozdonyon dolgoznak
         public int Starting_Torque { get; set; }//Indító vonóerő. 10 tonnánként kell 1, hogy a mozdony megtudja mozdítani a szerelvényt
-        public double load { get {
-                double load = 0;//
-                foreach (var item in Wagons)
-                {
-                    load+= item.Quantity;
-                }
-                return load;
-            }//A mozdony mögé kötött kocsik okozta terhelés.
-        }
+        public double load { get; set; }
         [NotMapped]
         public virtual ICollection<Wagon> Wagons { get; set; }//A mozdony mögé csatolt vagonok
         [NotMapped]
