@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class LocomotiveRepository : ILocomotiveRepository
+    public class LocomotiveRepository : ILocomotiveRepository
     {
         TrainDbContext db = new TrainDbContext();
 

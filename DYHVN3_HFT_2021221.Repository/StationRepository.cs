@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class StationRepository : IStationRepository
+    public class StationRepository : IStationRepository
     {
         TrainDbContext db = new TrainDbContext();
         public StationRepository(TrainDbContext db)

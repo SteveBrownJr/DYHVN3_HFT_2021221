@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Logic
 {
-    public class StationLogic
+    public class StationLogic : IStationLogic
     {
         IStationRepository StationRepo;
 
@@ -41,7 +41,7 @@ namespace DYHVN3_HFT_2021221.Logic
             StationRepo.Update(l);
         }
         //noncrud
-        public double DistanceBetweenTwoStation(int sid1,int sid2)
+        public double DistanceBetweenTwoStation(int sid1, int sid2)
         {
             Station s1 = Read(sid1);
             Station s2 = Read(sid2);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Logic
 {
-    public class WagonLogic
+    public class WagonLogic : IWagonLogic
     {
         IWagonRepository WagonRepo;
 
@@ -20,7 +20,7 @@ namespace DYHVN3_HFT_2021221.Logic
         public void Create(Wagon Wagon)
         {
             Locomotive l = Wagon.locomotive;
-            if (l.load+Wagon.Quantity>l.Starting_Torque*10)
+            if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
             }
@@ -61,17 +61,19 @@ namespace DYHVN3_HFT_2021221.Logic
                     {
                         Cargo_Type = g.Key,
                         Count = g.Count()
-                    }).OrderByDescending(t=>t.Count).First().Cargo_Type;
+                    }).OrderByDescending(t => t.Count).First().Cargo_Type;
         }
 
         public ICollection<Wagon> LongestTrain()
         {
             return (from x in ReadAll()
-                            group x by x.locomotive
-            into g select new {
-                Locomotive = g.Key,
-                Number = g.Count()
-            }).OrderByDescending(t=>t.Number).First().Locomotive.Wagons;
+                    group x by x.locomotive
+            into g
+                    select new
+                    {
+                        Locomotive = g.Key,
+                        Number = g.Count()
+                    }).OrderByDescending(t => t.Number).First().Locomotive.Wagons;
         }
 
         public double AvarageStartingTorqueForTheWagon(Wagon w)

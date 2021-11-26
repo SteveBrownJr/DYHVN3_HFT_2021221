@@ -1,3 +1,6 @@
+using DYHVN3_HFT_2021221.Data;
+using DYHVN3_HFT_2021221.Logic;
+using DYHVN3_HFT_2021221.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,13 +15,18 @@ namespace DYHVN3_HFT_2021221.Endpoint
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddTransient<ILocomotiveLogic, LocomotiveLogic>();
+            services.AddTransient<IWagonLogic, WagonLogic>();
+            services.AddTransient<IStationLogic, StationLogic>();
+            services.AddTransient<ILocomotiveRepository, LocomotiveRepository>();
+            services.AddTransient<IWagonRepository, WagonRepository>();
+            services.AddTransient<IStationRepository, StationRepository>();
+            services.AddTransient<TrainDbContext, TrainDbContext>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -28,13 +36,7 @@ namespace DYHVN3_HFT_2021221.Endpoint
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

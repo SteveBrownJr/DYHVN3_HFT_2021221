@@ -8,10 +8,10 @@ using DYHVN3_HFT_2021221.Models;
 
 namespace DYHVN3_HFT_2021221.Logic
 {
-    public class LocomotiveLogic
+    public class LocomotiveLogic : ILocomotiveLogic
     {
         ILocomotiveRepository locomotiveRepo;
-        
+
         public LocomotiveLogic(ILocomotiveRepository locomotiveRepo)
         {
             this.locomotiveRepo = locomotiveRepo;
@@ -31,7 +31,7 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             return locomotiveRepo.GetAll();
         }
-        
+
         public void Delete(int id)
         {
             locomotiveRepo.Delete(id);

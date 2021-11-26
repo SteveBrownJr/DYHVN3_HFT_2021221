@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Models
@@ -15,7 +16,7 @@ namespace DYHVN3_HFT_2021221.Models
         public int Station_Id { get; set; }//Az állomás azonosítója
         [ForeignKey(nameof(Locomotive))]
         public int Locomotive_Id { get; set; }//Az állomást érintő vonat azonosítója
-        
+        [JsonIgnore]
         public virtual Locomotive locomotive { get; set; }//Az állomást érintő vonat
         public string Name { get; set; }//Az állomás neve
         public int x_cordinate { get; set; }//Az állomás x koordinátája

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYHVN3_HFT_2021221.Repository
 {
-    class WagonRepository : IWagonRepository
+    public class WagonRepository : IWagonRepository
     {
         TrainDbContext db;
         public WagonRepository(TrainDbContext db)
