@@ -77,6 +77,16 @@ namespace DYHVN3_HFT_2021221.Client
             }
             return item;
         }
+        public T Get<T>(int id1,int id2, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + id1.ToString() + "/" + id2.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
 
         public void Post<T>(T item, string endpoint)
         {

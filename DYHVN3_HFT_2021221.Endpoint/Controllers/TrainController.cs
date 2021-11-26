@@ -59,7 +59,7 @@ namespace DYHVN3_HFT_2021221.Endpoint.Controllers
         #region Station non-cruds
 
         [HttpGet("{first}/{second}")]
-        public double Route(int first, int second)
+        public double DistanceBetweenTwoStation(int first, int second)
         {
             return Sl.DistanceBetweenTwoStation(first, second);
         }

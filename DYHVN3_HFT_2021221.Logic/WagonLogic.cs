@@ -11,20 +11,23 @@ namespace DYHVN3_HFT_2021221.Logic
     public class WagonLogic : IWagonLogic
     {
         IWagonRepository WagonRepo;
+        ILocomotiveRepository LocomotiveRepo;
 
-        public WagonLogic(IWagonRepository WagonRepo)
+        public WagonLogic(IWagonRepository WagonRepo, ILocomotiveRepository LocomotiveRepo)
         {
             this.WagonRepo = WagonRepo;
+            this.LocomotiveRepo = LocomotiveRepo;
         }
 
         public void Create(Wagon Wagon)
         {
-            Locomotive l = Wagon.locomotive;
+            Locomotive l = LocomotiveRepo.GetAll().FirstOrDefault(t=>t.Locomotive_Id==Wagon.Locomotive_Id);
             if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
             }
             l.load += Wagon.Quantity;
+            LocomotiveRepo.Update(l);
             WagonRepo.Create(Wagon);
         }
 

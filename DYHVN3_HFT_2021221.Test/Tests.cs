@@ -73,7 +73,7 @@ namespace DYHVN3_HFT_2021221.Test
             for (int i = 1; i <= fakeWagons.Count; i++)
                 mockWagonRepository.Setup((t) => t.Read(i)).Returns(fakeWagons[i - 1]);
             locomotiveLogic = new LocomotiveLogic(mockLocomotiveRepository.Object);
-            wagonLogic = new WagonLogic(mockWagonRepository.Object);
+            wagonLogic = new WagonLogic(mockWagonRepository.Object,mockLocomotiveRepository.Object);
             stationLogic = new StationLogic(mockStationRepository.Object);
         }
 
