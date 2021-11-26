@@ -51,7 +51,7 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             IQueryable<Wagon> t = ReadAll();
             return t.OrderByDescending(t => t.Quantity).First();
-        }
+        }//Controllerbe implementálva
 
         public Cargo_Type MostCommonCargoType()
         {
@@ -63,23 +63,10 @@ namespace DYHVN3_HFT_2021221.Logic
                         Cargo_Type = g.Key,
                         Count = g.Count()
                     }).OrderByDescending(t => t.Count).First().Cargo_Type;
-        }
-
-        public ICollection<Wagon> LongestTrain()
+        }//Controllerbe implementálva
+        public double AvarageStartingTorqueForTheWagon(int id)//Controllerbe implementálva
         {
-            return (from x in ReadAll()
-                    group x by x.locomotive
-            into g
-                    select new
-                    {
-                        Locomotive = g.Key,
-                        Number = g.Count()
-                    }).OrderByDescending(t => t.Number).First().Locomotive.Wagons;
-        }
-
-        public double AvarageStartingTorqueForTheWagon(Wagon w)
-        {
-            return w.locomotive.Starting_Torque / w.locomotive.Wagons.Count();
+            return WagonRepo.Read(id).locomotive.Starting_Torque / WagonRepo.Read(id).locomotive.Wagons.Count();
         }
     }
 }

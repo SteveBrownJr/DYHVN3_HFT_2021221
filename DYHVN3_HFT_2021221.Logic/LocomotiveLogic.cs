@@ -41,30 +41,32 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             locomotiveRepo.Update(l);
         }
+
         //non-crud methods
-        public ICollection<Station> TouchedStations(Locomotive l)//Az állomások
+        public IEnumerable<Station> TouchedStations(int id)//Controllerbe implementálva
         {
-            return l.Stations;
+            return locomotiveRepo.Read(id).Stations;
         }
-        public Locomotive LongestTrain()
+        public Locomotive LongestTrain()//Controllerbe implementálva
         {
-            return ReadAll().OrderByDescending(t => t.Wagons.Count).First();
+            return locomotiveRepo.GetAll().OrderByDescending(t => t.Wagons.Count).First();
         }
-        public Locomotive MostPowerFulLocomotive()
+        public Locomotive MostPowerFulLocomotive() //Controllerbe implementálva
         {
             return ReadAll().OrderByDescending(t => t.Starting_Torque).First();
         }
-        public Locomotive WeakestLocomotive()
+        public Locomotive WeakestLocomotive() //Controllerbe implementálva
         {
             return ReadAll().OrderBy(t => t.Starting_Torque).First();
         }
-        public IEnumerable<Station> Route(Locomotive l)//Az állomások sorrendben
+        public IEnumerable<Station> Route(int id)//Az állomások sorrendben - Controllerbe implementálva
         {
+            Locomotive l = locomotiveRepo.Read(id);
             ICollection<Station> stations = l.Stations;
             Station first = stations.OrderBy(s => s.DistanceFrom(new Station() { x_cordinate = 0, y_cordinate = 0 })).First(); //Elso allomas az ami legkozelebb van a 0;0 koordinátához;
             return stations.OrderBy(s => s.DistanceFrom(first));//Az elsőtől való távolságuk növekvő sorrendben
         }
-        public Locomotive FastestAcceleratingTrain()
+        public Locomotive FastestAcceleratingTrain()//Controllerbe implementálva
         {
             return ReadAll().OrderBy(t => t.load / t.Starting_Torque).First();
         }

@@ -30,8 +30,8 @@ namespace DYHVN3_HFT_2021221.Test
 
             List<Locomotive> fakeLocomotives = new List<Locomotive>()
             {
-               new Locomotive() { Locomotive_Id = 1, Name = "Szocske", Staff = 1, Starting_Torque = rnd.Next(198,202), Type = "V46"},
-               new Locomotive() { Locomotive_Id = 2, Name = "Csorgo", Staff = 2, Starting_Torque = 204, Type = "M41"}
+               new Locomotive() { Locomotive_Id = 1, Name = "Szocske", Staff = 1, Starting_Torque = rnd.Next(198,202), Type = "V46",load=32000},
+               new Locomotive() { Locomotive_Id = 2, Name = "Csorgo", Staff = 2, Starting_Torque = 204, Type = "M41",load=1300}
             };
             List<Station> fakeStations = new List<Station>() {
             new Station() { Station_Id = 1,Locomotive_Id=1,locomotive=fakeLocomotives[0],Name="London", x_cordinate = rnd.Next(0, 10), y_cordinate = rnd.Next(0, 10) },
@@ -87,7 +87,7 @@ namespace DYHVN3_HFT_2021221.Test
         public void RouteTest()
         {
             bool correct = true;
-            IEnumerable<Station> route = locomotiveLogic.Route(locomotiveLogic.ReadAll().FirstOrDefault(t=>t.Locomotive_Id==2));
+            IEnumerable<Station> route = locomotiveLogic.Route(2);
             int j = 0;
             for (int i = 1; i < route.Count(); i++)
                 if (route.ElementAt(i).DistanceFrom(new Station() { x_cordinate=0,y_cordinate=0}) < route.ElementAt(j).DistanceFrom(new Station() { x_cordinate = 0, y_cordinate = 0 }))//Azt nézzük meg, hogy az n-1 állomás mindig közelebb legyen az origóhoz mint az n-edik
@@ -110,6 +110,7 @@ namespace DYHVN3_HFT_2021221.Test
         [Test]
         public void FastestAccelleratingTest()
         {
+            Console.WriteLine(locomotiveLogic.FastestAcceleratingTrain().Locomotive_Id);
             Assert.That(locomotiveLogic.FastestAcceleratingTrain().Equals(locomotiveLogic.Read(2)));
         }
 

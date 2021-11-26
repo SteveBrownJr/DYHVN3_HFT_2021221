@@ -12,8 +12,8 @@ namespace DYHVN3_HFT_2021221.Logic
         Locomotive MostPowerFulLocomotive();
         Locomotive Read(int id);
         IEnumerable<Locomotive> ReadAll();
-        IEnumerable<Station> Route(Locomotive l);
-        ICollection<Station> TouchedStations(Locomotive l);
+        IEnumerable<Station> Route(int id);
+        IEnumerable<Station> TouchedStations(int id);
         void Update(Locomotive l);
         Locomotive WeakestLocomotive();
     }

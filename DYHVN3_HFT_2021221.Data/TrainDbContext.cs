@@ -55,7 +55,7 @@ namespace DYHVN3_HFT_2021221.Data
             Locomotive Fecske = new Locomotive() { Name = "Fecske", Locomotive_Id = 2, Staff = 1, Type = "Szili", Starting_Torque = 270 }; //MÁV szilícium egyenirányítós mozdonyának egyik szériájának darabja
             Locomotive Repcebika = new Locomotive() { Name = "Repcebika", Locomotive_Id = 3, Staff = 2, Type = "Taurus", Starting_Torque = 300 };//A GySEV mozdonya
             Locomotive Doremi = new Locomotive() { Name = "Doremi", Locomotive_Id = 4, Staff = 2, Type = "Taurus", Starting_Torque = 300 };//MÁV mozdonya, szolmizál induláskor
-            Locomotive KisLeo = new Locomotive() { Name = "Kisleo", Locomotive_Id = 5, Staff = 3, Type = "V41", Starting_Torque = 230 };
+            Locomotive KisLeo = new Locomotive() { Name = "Kisleo", Locomotive_Id = 5, Staff = 3, Type = "ShuntingLocomotive", Starting_Torque = 230 };
 
             modelBuilder.Entity<Locomotive>().HasData(Gunhild, Fecske, Repcebika, Doremi, KisLeo);
 

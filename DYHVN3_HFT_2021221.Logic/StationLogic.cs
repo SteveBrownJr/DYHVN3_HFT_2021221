@@ -41,30 +41,30 @@ namespace DYHVN3_HFT_2021221.Logic
             StationRepo.Update(l);
         }
         //noncrud
-        public double DistanceBetweenTwoStation(int sid1, int sid2)
+        public double DistanceBetweenTwoStation(int sid1, int sid2)//Controllerbe implementálva
         {
             Station s1 = Read(sid1);
             Station s2 = Read(sid2);
             return Math.Sqrt(Math.Pow((s1.x_cordinate - s2.x_cordinate), 2) + Math.Pow((s1.y_cordinate - s2.y_cordinate), 2));
         }
 
-        public Locomotive TouchingLocomotive(int sid)
+        public Locomotive TouchingLocomotive(int sid) //Controllerbe implementálva
         {
             Station s = Read(sid);
             return s.locomotive;
         }
-        public ICollection<Wagon> TouchingWagons(int sid)
+        public ICollection<Wagon> TouchingWagons(int sid)//Controllerbe implementálva
         {
             Station s = Read(sid);
             return s.locomotive.Wagons;
         }
 
-        public double MovedQuantity(int sid)
+        public double MovedQuantity(int sid)//Controllerbe implementálva
         {
             Station s = Read(sid);
             return s.locomotive.load;
         }
-        public IEnumerable<Cargo_Type> MovedCargoTypes(int sid)
+        public IEnumerable<Cargo_Type> MovedCargoTypes(int sid)//Controllerbe implementálva
         {
             Station s = Read(sid);
             return s.locomotive.Wagons.Select(wagon => wagon.CargoType);
