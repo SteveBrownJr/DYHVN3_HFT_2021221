@@ -12,7 +12,7 @@ namespace DYHVN3_HFT_2021221.Logic
         Wagon HeviestWagon();
         Cargo_Type MostCommonCargoType();
         Wagon Read(int id);
-        IQueryable<Wagon> ReadAll();
+        IEnumerable<Wagon> ReadAll();
         void Update(Wagon w);
     }
 }

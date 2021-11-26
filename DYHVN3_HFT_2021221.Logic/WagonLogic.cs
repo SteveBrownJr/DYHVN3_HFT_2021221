@@ -22,10 +22,10 @@ namespace DYHVN3_HFT_2021221.Logic
         public void Create(Wagon Wagon)
         {
             Locomotive l = LocomotiveRepo.GetAll().FirstOrDefault(t=>t.Locomotive_Id==Wagon.Locomotive_Id);
-            /*if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
+            if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
-            }*/
+            }
             l.load += Wagon.Quantity;
             LocomotiveRepo.Update(l);
             WagonRepo.Create(Wagon);
@@ -33,20 +33,39 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public Wagon Read(int id)
         {
-            return WagonRepo.Read(id);
+            Wagon l = WagonRepo.Read(id); ;
+            if (l == null)
+                throw new IndexOutOfRangeException();
+            return l;
         }
 
-        public IQueryable<Wagon> ReadAll()
+        public IEnumerable<Wagon> ReadAll()
         {
-            return WagonRepo.GetAll();
+            IEnumerable<Wagon> returnvalue = WagonRepo.GetAll();
+            if (returnvalue.Count() < 1)
+            {
+                throw new Exception("No locomotive found");
+            }
+            return returnvalue;
         }
 
         public void Delete(int id)
         {
-            WagonRepo.Delete(id);
+            try
+            {
+                WagonRepo.Delete(id);
+            }
+            catch (Exception)
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
         public void Update(Wagon w)
         {
+            if (LocomotiveRepo.Read(w.Locomotive_Id).load + w.Quantity > LocomotiveRepo.Read(w.Locomotive_Id).load * 10)
+            {
+                throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
+            }
             Locomotive connect = LocomotiveRepo.Read(w.Locomotive_Id);
             connect.load += w.Quantity;
             LocomotiveRepo.Update(connect);
@@ -54,13 +73,16 @@ namespace DYHVN3_HFT_2021221.Logic
             Locomotive disconnect = LocomotiveRepo.Read(WagonRepo.Read(w.Wagon_Id).Locomotive_Id);
             disconnect.load -= w.Quantity;
             LocomotiveRepo.Update(disconnect);
-            
+            if (w.Locomotive_Id==0)
+            {
+                throw new IndexOutOfRangeException();
+            }
             WagonRepo.Update(w);
         }
         //non-crud
         public Wagon HeviestWagon()
         {
-            IQueryable<Wagon> t = ReadAll();
+            IEnumerable<Wagon> t = ReadAll();
             return t.OrderByDescending(t => t.Quantity).First();
         }//Controllerbe implementálva
 

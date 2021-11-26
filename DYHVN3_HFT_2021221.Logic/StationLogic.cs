@@ -22,26 +22,49 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Station Station)
         {
+            if (Station.Locomotive_Id==0||Station.x_cordinate==0||Station.y_cordinate==0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             StationRepo.Create(Station);
         }
 
         public Station Read(int id)
         {
+            Station s = StationRepo.Read(id);
+            if (s==null)
+                throw new IndexOutOfRangeException();
             return StationRepo.Read(id);
         }
 
         public IEnumerable<Station> ReadAll()
         {
-            return StationRepo.GetAll();
+            IEnumerable<Station> returnvalue = StationRepo.GetAll();
+            if (returnvalue.Count() < 1)
+            {
+                throw new Exception("No locomotive found");
+            }
+            return returnvalue;
         }
 
         public void Delete(int id)
         {
-            StationRepo.Delete(id);
+            try
+            {
+                StationRepo.Delete(id);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
-        public void Update(Station l)
+        public void Update(Station s)
         {
-            StationRepo.Update(l);
+            if (s.Name.Length<3||s.x_cordinate==0||s.y_cordinate==0||s.Locomotive_Id==0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            StationRepo.Update(s);
         }
         //noncrud
         public double DistanceBetweenTwoStation(int sid1, int sid2)//Controllerbe implementálva

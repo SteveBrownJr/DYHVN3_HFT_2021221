@@ -22,18 +22,29 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Locomotive locomotive)
         {
+            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 4 || locomotive.Staff < 1)
+                throw new ArgumentOutOfRangeException();
             locomotive.load = 0;
             locomotiveRepo.Create(locomotive);
+            
         }
 
         public Locomotive Read(int id)
         {
-            return locomotiveRepo.Read(id);
+            Locomotive l = locomotiveRepo.Read(id); ;
+            if (l == null)
+                    throw new IndexOutOfRangeException();
+            return l;
         }
 
         public IEnumerable<Locomotive> ReadAll()
-        { 
-            return locomotiveRepo.GetAll();
+        {
+            IEnumerable<Locomotive> returnvalue = locomotiveRepo.GetAll();
+            if (returnvalue.Count() < 1)
+            {
+                throw new Exception("No locomotive found");
+            }
+            return returnvalue;
         }
 
         public void Delete(int id)
@@ -44,14 +55,14 @@ namespace DYHVN3_HFT_2021221.Logic
             }
             catch (Exception)
             {
-                //Mivel a vagonoknak és az állomásoknak idegen kulcsa a mozdony elsődleges kulcsa
-                //ezért mindig hibára fogunk futni, ha olyan mozdonyt akarunk törölni aminek még vannak ilyen
-                //vagy olyan függőségei ezért van itt ez a try{}catch blokk
+                throw/* new InvalidOperationException("We can't delete a locomotive with wagons and destinations")*/;
             }
         }
-        public void Update(Locomotive l)
+        public void Update(Locomotive locomotive)
         {
-            locomotiveRepo.Update(l);
+            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 4 || locomotive.Staff < 1)
+                throw new ArgumentOutOfRangeException();
+            locomotiveRepo.Update(locomotive);
         }
 
         //non-crud methods
