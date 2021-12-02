@@ -92,7 +92,7 @@ namespace DYHVN3_HFT_2021221.Test
             for (int i = 1; i < route.Count(); i++)
                 if (route.ElementAt(i).DistanceFrom(new Station() { x_cordinate=0,y_cordinate=0}) < route.ElementAt(j).DistanceFrom(new Station() { x_cordinate = 0, y_cordinate = 0 }))//Azt nézzük meg, hogy az n-1 állomás mindig közelebb legyen az origóhoz mint az n-edik
                     correct = false;
-            Assert.That(correct);//Remélem nem "felesleges" unit teszt.
+            Assert.That(correct);
         }
 
         [Test]

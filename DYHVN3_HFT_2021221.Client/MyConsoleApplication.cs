@@ -452,7 +452,7 @@ namespace DYHVN3_HFT_2021221.Client
                         Console.ReadKey();
                         break;
                     }
-                case 8://nem mukodik
+                case 8:
                     {
                         Console.Clear();
                         Console.WriteLine("Station: ");

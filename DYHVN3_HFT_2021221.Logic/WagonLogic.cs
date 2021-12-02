@@ -88,7 +88,7 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             IEnumerable<Wagon> t = ReadAll();
             return t.OrderByDescending(t => t.Quantity).First();
-        }//Controllerbe implementálva
+        }
 
         public Cargo_Type MostCommonCargoType()
         {
@@ -100,8 +100,8 @@ namespace DYHVN3_HFT_2021221.Logic
                         Cargo_Type = g.Key,
                         Count = g.Count()
                     }).OrderByDescending(t => t.Count).First().Cargo_Type;
-        }//Controllerbe implementálva
-        public double AvarageStartingTorqueForTheWagon(int id)//Controllerbe implementálva
+        }
+        public double AvarageStartingTorqueForTheWagon(int id)
         {
             return WagonRepo.Read(id).locomotive.Starting_Torque / WagonRepo.Read(id).locomotive.Wagons.Count();
         }
