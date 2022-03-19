@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DYHVN3_HFT_2021221.WpfClient"
         mc:Ignorable="d"
-        Title="Locomotive Editor" Height="800" Width="1050">
+        Title="Locomotive Editor" Height="800" Width="1410">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -14,10 +14,11 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <ListBox ItemsSource="{Binding Locomotives}" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedLocomotive}">
             <ListBox.ItemTemplate>
@@ -43,14 +44,128 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Column="0" Grid.Row="1">
-            <Label Content="Name" Background="LightBlue" Padding="10"/>
-            <TextBox Text="{Binding SelectedLocomotive.Name}" Padding="10" Margin="0,0,0,30"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="24*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBox Text="{Binding LocomotiveUnderUpdate.Name}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding LocomotiveUnderUpdate.Type}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding LocomotiveUnderUpdate.Starting_Torque}" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding LocomotiveUnderUpdate.Staff}" Grid.Row="3" Grid.Column="1"/>
+                <Label Content="Becenév: " Grid.Row="0" Grid.Column="0"/>
+                <Label Content="Típus" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="Indító vonóerő" Grid.Row="2" Grid.Column="0"/>
+                <Label Content="Személyzet száma:" Grid.Row="3" Grid.Column="0"/>
+            </Grid>
             <Button Content="Create Locomotive" Command="{Binding CreateLocomotiveCommand}" Margin="10" Padding="10"/>
             <Button Content="Delete Locomotive" Command="{Binding DeleteLocomotiveCommand}" Margin="10" Padding="10"/>
             <Button Content="Update Locomotive" Command="{Binding UpdateLocomotiveCommand}" Margin="10" Padding="10"/>
         </StackPanel>
-        <ListBox>
-            
-        </ListBox>    
+        <ListBox ItemsSource="{Binding Wagons}" SelectedItem="{Binding SelectedWagon}" Grid.Column="1" Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="{Binding Wagon_Id}" ContentStringFormat="Id: {0}" Grid.Column="0" Grid.Row="0"/>
+                        <Label Content="{Binding CargoType}" Grid.Column="1" ContentStringFormat="Raktértípus: {0}" Grid.Row="0"/>
+                        <Label Content="{Binding Locomotive_Id}" Grid.Column="0" ContentStringFormat="Mozdony_Id: {0}" Grid.Row="1"/>
+                        <Label Content="{Binding Quantity}" ContentStringFormat="Mennyiség: {0} tonna" Grid.Column="1" Grid.Row="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="24*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Mennyiség:" Grid.Row="0" Grid.Column="0"/>
+                <Label Content="Mozdony_id:" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="Raktértípus:" Grid.Row="2" Grid.Column="0"/>
+                <Label Content=" " Grid.Row="3" Grid.Column="0"/>
+                <TextBox Text="{Binding WagonUnderUpdate.Quantity}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding WagonUnderUpdate.Locomotive_Id}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding WagonUnderUpdate.CargoType}" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+            <Button Content="Create Wagon" Command="{Binding CreateWagonCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Wagon" Command="{Binding DeleteWagonCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Wagon" Command="{Binding UpdateWagonCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding Stations}" SelectedItem="{Binding SelectedStation}" Grid.Column="2" Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="{Binding Station_Id}" ContentStringFormat="Állomásazonosító: {0}" Grid.Column="0" Grid.Row="0"/>
+                        <Label Content="{Binding Name}" ContentStringFormat="Név: {0}" Grid.Column="0" Grid.Row="1"/>
+                        <Label Content="{Binding Locomotive_Id}" Grid.Column="1" ContentStringFormat="Mozdony_Id: {0}" Grid.Row="0"/>
+                        <Label Content="{Binding x_cordinate}" Grid.Column="2" ContentStringFormat="X: {0}" Grid.Row="0"/>
+                        <Label Content="{Binding y_cordinate}" ContentStringFormat="Y: {0}" Grid.Column="2" Grid.Row="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="24*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Állomásnév:" Grid.Row="0" Grid.Column="0"/>
+                <Label Content="Mozdony_id:" Grid.Row="1" Grid.Column="0"/>
+                <Label Content="X:" Grid.Row="2" Grid.Column="0"/>
+                <Label Content="Y:" Grid.Row="3" Grid.Column="0"/>
+                <TextBox Text="{Binding SelectedStation.Name}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedStation.Locomotive_Id}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedStation.x_cordinate}" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding SelectedStation.y_cordinate}" Grid.Row="3" Grid.Column="1"/>
+            </Grid>
+            <Button Content="Create Station" Command="{Binding CreateStationCommand}" Margin="10" Padding="10"/>
+            <Button Content="Delete Station" Command="{Binding DeleteStationCommand}" Margin="10" Padding="10"/>
+            <Button Content="Update Station" Command="{Binding UpdateStationCommand}" Margin="10" Padding="10"/>
+        </StackPanel>
+        <TextBox Grid.Column="3" Grid.Row="0" />
+        <StackPanel Grid.Column="3" Grid.Row="1">
+            <Button Content="1" Margin="10" Padding="10"/>
+            <Button Content="2" Margin="10" Padding="10"/>
+            <Button Content="3" Margin="10" Padding="10"/>
+            <Button Content="4" Margin="10" Padding="10"/>
+            <Button Content="5" Margin="10" Padding="10"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -21,7 +21,7 @@ namespace DYHVN3_HFT_2021221.Logic
 
         public void Create(Wagon Wagon)
         {
-            if (Wagon.Locomotive_Id==0||Wagon.Wagon_Id==0)
+            if (Wagon.Locomotive_Id==0)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -66,7 +66,7 @@ namespace DYHVN3_HFT_2021221.Logic
         }
         public void Update(Wagon w)
         {
-            if (LocomotiveRepo.Read(w.Locomotive_Id).load + w.Quantity > LocomotiveRepo.Read(w.Locomotive_Id).load * 10)
+            if (LocomotiveRepo.Read(w.Locomotive_Id).load + w.Quantity > LocomotiveRepo.Read(w.Locomotive_Id).Starting_Torque * 100)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
             }
