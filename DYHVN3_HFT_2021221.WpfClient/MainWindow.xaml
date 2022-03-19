@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DYHVN3_HFT_2021221.WpfClient"
         mc:Ignorable="d"
-        Title="Locomotive Editor" Height="450" Width="800">
+        Title="Locomotive Editor" Height="800" Width="1050">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -13,12 +13,18 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Locomotives}" SelectedItem="{Binding SelectedLocomotive}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Locomotives}" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedLocomotive}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
@@ -26,20 +32,25 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <Label Content="{Binding Locomotive_Id}" Grid.Column="0" Grid.Row="0"/>
-                        <Label Content="{Binding Name}" Grid.Column="1" Grid.Row="0"/>
-                        <Label Content="{Binding Type}" Grid.Column="0" Grid.Row="1"/>
-                        <Label Content="{Binding Starting_Torque}" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="{Binding Locomotive_Id}" ContentStringFormat="Id: {0}" Grid.Column="0" Grid.Row="0"/>
+                        <Label Content="{Binding Name}" Grid.Column="1" ContentStringFormat="Becenév: {0}" Grid.Row="0"/>
+                        <Label Content="{Binding Type}" Grid.Column="0" ContentStringFormat="Típus: {0}" Grid.Row="1"/>
+                        <Label Content="{Binding Starting_Torque}" ContentStringFormat="Indító vonóerő: {0} kN" Grid.Column="1" Grid.Row="1"/>
+                        <Label Content="{Binding load}" ContentStringFormat="Terhelés: {0} tonna" Grid.Column="2" Grid.Row="1"/>
+                        <Label Content="{Binding Staff}" ContentStringFormat="Személyzet száma: {0} fő" Grid.Column="2" Grid.Row="0"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="0" Grid.Row="1">
             <Label Content="Name" Background="LightBlue" Padding="10"/>
             <TextBox Text="{Binding SelectedLocomotive.Name}" Padding="10" Margin="0,0,0,30"/>
             <Button Content="Create Locomotive" Command="{Binding CreateLocomotiveCommand}" Margin="10" Padding="10"/>
             <Button Content="Delete Locomotive" Command="{Binding DeleteLocomotiveCommand}" Margin="10" Padding="10"/>
             <Button Content="Update Locomotive" Command="{Binding UpdateLocomotiveCommand}" Margin="10" Padding="10"/>
         </StackPanel>
+        <ListBox>
+            
+        </ListBox>    
     </Grid>
 </Window>
