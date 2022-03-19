@@ -26,7 +26,7 @@ namespace DYHVN3_HFT_2021221.Logic
                 throw new ArgumentOutOfRangeException();
             }
             Locomotive l = LocomotiveRepo.GetAll().FirstOrDefault(t=>t.Locomotive_Id==Wagon.Locomotive_Id);
-            if (l.load + Wagon.Quantity > l.Starting_Torque * 10)
+            if (l.load + Wagon.Quantity > l.Starting_Torque * 100)
             {
                 throw new Exception("If we connect his wagon to the locomotive, the locomotive will be overloaded");
             }

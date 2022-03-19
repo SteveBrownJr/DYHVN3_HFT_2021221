@@ -43,6 +43,7 @@ namespace DYHVN3_HFT_2021221.Endpoint.Controllers
         {
             Wl.Create(value);
             this.hub.Clients.All.SendAsync("WagonCreated", value);
+            this.hub.Clients.All.SendAsync("LocomotiveUpdated", value.locomotive);
         }
 
         // PUT api/<WagonController>/5

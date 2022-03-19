@@ -17,14 +17,49 @@ namespace DYHVN3_HFT_2021221.WpfClient
         #region Stations
         public RestCollection<Station> Stations { get; set; }
         private Station selectedStation;
-        private Station modifiableStation;
+        private Station stationUnderUpdate;
+        private string nonCRUDOuput;
+        public string NonCRUDOuput
+        {
+            get
+            {
+                return nonCRUDOuput;
+            }
+            set
+            {
+                SetProperty(ref nonCRUDOuput, value);
+            }
+        }
+
+        public Station StationUnderUpdate
+        {
+            get
+            {
+                return stationUnderUpdate;
+            }
+            set
+            {
+                SetProperty(ref stationUnderUpdate, value);
+            }
+        }
         public Station SelectedStation { get
             {
                 return selectedStation;
             }
             set
             {
-                SetProperty(ref selectedStation, value);
+                if (value!=null)
+                {
+                    SetProperty(ref selectedStation, value);
+                    StationUnderUpdate = new Station()
+                    {
+                        Station_Id=selectedStation.Station_Id,
+                        Locomotive_Id=selectedStation.Locomotive_Id,
+                        Name=selectedStation.Name,
+                        x_cordinate=selectedStation.x_cordinate,
+                        y_cordinate=selectedStation.y_cordinate
+                    };
+                }
                 (DeleteStationCommand as RelayCommand).NotifyCanExecuteChanged();
             }
         }
@@ -203,10 +238,10 @@ namespace DYHVN3_HFT_2021221.WpfClient
                 {
                     Stations.Add(new Station()
                     {
-                        Name=selectedStation.Name,
-                        x_cordinate = selectedStation.x_cordinate,
-                        y_cordinate=selectedStation.y_cordinate,
-                        Locomotive_Id=selectedStation.Locomotive_Id
+                        Name=StationUnderUpdate.Name,
+                        x_cordinate = StationUnderUpdate.x_cordinate,
+                        y_cordinate= StationUnderUpdate.y_cordinate,
+                        Locomotive_Id=StationUnderUpdate.Locomotive_Id
                     }
                     );
                 });
@@ -223,7 +258,7 @@ namespace DYHVN3_HFT_2021221.WpfClient
 
                 UpdateStationCommand = new RelayCommand(() =>
                 {
-
+                    Stations.Update(StationUnderUpdate);
                 });
                 #endregion
 

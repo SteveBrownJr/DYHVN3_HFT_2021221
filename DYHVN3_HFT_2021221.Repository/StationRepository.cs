@@ -40,7 +40,7 @@ namespace DYHVN3_HFT_2021221.Repository
         }
         public void Update(Station Station)
         {
-            var StationToUpdate = Read(Station.Locomotive_Id);
+            var StationToUpdate = Read(Station.Station_Id);
             StationToUpdate.Name = Station.Name;
             StationToUpdate.Locomotive_Id = Station.Locomotive_Id;
             StationToUpdate.x_cordinate = Station.x_cordinate;

@@ -150,10 +150,10 @@
                 <Label Content="Mozdony_id:" Grid.Row="1" Grid.Column="0"/>
                 <Label Content="X:" Grid.Row="2" Grid.Column="0"/>
                 <Label Content="Y:" Grid.Row="3" Grid.Column="0"/>
-                <TextBox Text="{Binding SelectedStation.Name}" Grid.Row="0" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedStation.Locomotive_Id}" Grid.Row="1" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedStation.x_cordinate}" Grid.Row="2" Grid.Column="1"/>
-                <TextBox Text="{Binding SelectedStation.y_cordinate}" Grid.Row="3" Grid.Column="1"/>
+                <TextBox Text="{Binding StationUnderUpdate.Name}" Grid.Row="0" Grid.Column="1"/>
+                <TextBox Text="{Binding StationUnderUpdate.Locomotive_Id}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding StationUnderUpdate.x_cordinate}" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding StationUnderUpdate.y_cordinate}" Grid.Row="3" Grid.Column="1"/>
             </Grid>
             <Button Content="Create Station" Command="{Binding CreateStationCommand}" Margin="10" Padding="10"/>
             <Button Content="Delete Station" Command="{Binding DeleteStationCommand}" Margin="10" Padding="10"/>
