@@ -25,6 +25,10 @@ namespace DYHVN3_HFT_2021221.WpfClient
             } while (isOk == false);
             Init(baseurl);
         }
+        public RestService(string baseurl)
+        {
+            Init(baseurl);
+        }
 
         private bool Ping(string url)
         {

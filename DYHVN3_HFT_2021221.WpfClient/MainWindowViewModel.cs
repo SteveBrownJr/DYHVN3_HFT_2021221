@@ -14,22 +14,29 @@ namespace DYHVN3_HFT_2021221.WpfClient
 {
     class MainWindowViewModel : ObservableRecipient
     {
+        private List<Locomotive> nonCRUDOutput1;
+        public List<Locomotive> nonCRUDOutput
+        {
+            get
+            {
+                return nonCRUDOutput1;
+            }
+            set
+            {
+                SetProperty(ref nonCRUDOutput1, value);
+            }
+        }
+        RestService rest;
+        public ICommand FastestTrain { get; set; }
+        public ICommand LongestTrain { get; set; }
+        public ICommand MostPowerfulLocomotive { get; set; }
+        public ICommand WeakestLocomotive { get; set; }
+        public ICommand LocomotiveofStation { get; set; }
+
         #region Stations
         public RestCollection<Station> Stations { get; set; }
         private Station selectedStation;
         private Station stationUnderUpdate;
-        private string nonCRUDOuput;
-        public string NonCRUDOuput
-        {
-            get
-            {
-                return nonCRUDOuput;
-            }
-            set
-            {
-                SetProperty(ref nonCRUDOuput, value);
-            }
-        }
 
         public Station StationUnderUpdate
         {
@@ -42,22 +49,24 @@ namespace DYHVN3_HFT_2021221.WpfClient
                 SetProperty(ref stationUnderUpdate, value);
             }
         }
-        public Station SelectedStation { get
+        public Station SelectedStation
+        {
+            get
             {
                 return selectedStation;
             }
             set
             {
-                if (value!=null)
+                if (value != null)
                 {
                     SetProperty(ref selectedStation, value);
                     StationUnderUpdate = new Station()
                     {
-                        Station_Id=selectedStation.Station_Id,
-                        Locomotive_Id=selectedStation.Locomotive_Id,
-                        Name=selectedStation.Name,
-                        x_cordinate=selectedStation.x_cordinate,
-                        y_cordinate=selectedStation.y_cordinate
+                        Station_Id = selectedStation.Station_Id,
+                        Locomotive_Id = selectedStation.Locomotive_Id,
+                        Name = selectedStation.Name,
+                        x_cordinate = selectedStation.x_cordinate,
+                        y_cordinate = selectedStation.y_cordinate
                     };
                 }
                 (DeleteStationCommand as RelayCommand).NotifyCanExecuteChanged();
@@ -86,27 +95,27 @@ namespace DYHVN3_HFT_2021221.WpfClient
         }
 
         private Wagon selectedWagon;
-        public Wagon SelectedWagon 
-        { 
-            get 
+        public Wagon SelectedWagon
+        {
+            get
             {
                 return selectedWagon;
-            } 
+            }
             set
             {
-                if (value!=null)
+                if (value != null)
                 {
                     SetProperty(ref selectedWagon, value);
                     WagonUnderUpdate = new Wagon()
                     {
-                        Locomotive_Id=selectedWagon.Locomotive_Id,
-                        Quantity= selectedWagon.Quantity,
-                        CargoType= selectedWagon.CargoType,
-                        Wagon_Id= selectedWagon.Wagon_Id
+                        Locomotive_Id = selectedWagon.Locomotive_Id,
+                        Quantity = selectedWagon.Quantity,
+                        CargoType = selectedWagon.CargoType,
+                        Wagon_Id = selectedWagon.Wagon_Id
                     };
                 }
                 (DeleteWagonCommand as RelayCommand).NotifyCanExecuteChanged();
-            } 
+            }
         }
         public ICommand CreateWagonCommand { get; set; }
 
@@ -117,11 +126,11 @@ namespace DYHVN3_HFT_2021221.WpfClient
         #region Locomotives
         public RestCollection<Locomotive> Locomotives { get; set; }
         public ICommand CreateLocomotiveCommand { get; set; }
-        
+
         public ICommand UpdateLocomotiveCommand { get; set; }
-        
+
         public ICommand DeleteLocomotiveCommand { get; set; }
-        
+
         private Locomotive locomotiveUnderUpdate;
         public Locomotive LocomotiveUnderUpdate
         {
@@ -135,15 +144,17 @@ namespace DYHVN3_HFT_2021221.WpfClient
             }
         }
         private Locomotive selectedLocomotive;
-        public Locomotive SelectedLocomotive 
-        { 
-            get 
-            { 
-                return selectedLocomotive; 
-            } 
-            set 
+        
+
+        public Locomotive SelectedLocomotive
+        {
+            get
             {
-                if (value!=null)
+                return selectedLocomotive;
+            }
+            set
+            {
+                if (value != null)
                 {
                     SetProperty(ref selectedLocomotive, value);
                     LocomotiveUnderUpdate = new Locomotive()
@@ -152,11 +163,11 @@ namespace DYHVN3_HFT_2021221.WpfClient
                         Starting_Torque = selectedLocomotive.Starting_Torque,
                         Name = selectedLocomotive.Name,
                         Type = selectedLocomotive.Type,
-                        Locomotive_Id= selectedLocomotive.Locomotive_Id
+                        Locomotive_Id = selectedLocomotive.Locomotive_Id
                     };
                 }
                 (DeleteLocomotiveCommand as RelayCommand).NotifyCanExecuteChanged();
-            } 
+            }
         }
         #endregion
         public static bool IsInDesignMode
@@ -169,13 +180,13 @@ namespace DYHVN3_HFT_2021221.WpfClient
         }
         public MainWindowViewModel()
         {
-            
+
             if (!IsInDesignMode)
             {
-                Locomotives = new RestCollection<Locomotive>("http://localhost:38193/","Locomotive","hub");
+                Locomotives = new RestCollection<Locomotive>("http://localhost:38193/", "Locomotive", "hub");
                 Wagons = new RestCollection<Wagon>("http://localhost:38193/", "Wagon", "hub");
                 Stations = new RestCollection<Station>("http://localhost:38193/", "Station", "hub");
-                
+
                 #region LocomotiveCommandDefinitions
                 CreateLocomotiveCommand = new RelayCommand(() =>
                 {
@@ -188,18 +199,18 @@ namespace DYHVN3_HFT_2021221.WpfClient
                     }
                     );
                 });
-            
+
                 DeleteLocomotiveCommand = new RelayCommand(() =>
                 {
                     Locomotives.Delete(SelectedLocomotive.Locomotive_Id);
                 },
-                () => 
+                () =>
                 {
-                    return SelectedLocomotive != null; 
+                    return SelectedLocomotive != null;
                 }
                 );
 
-                UpdateLocomotiveCommand = new RelayCommand(()=>
+                UpdateLocomotiveCommand = new RelayCommand(() =>
                 {
                     Locomotives.Update(LocomotiveUnderUpdate);
                 });
@@ -210,9 +221,9 @@ namespace DYHVN3_HFT_2021221.WpfClient
                 {
                     Wagons.Add(new Wagon()
                     {
-                        CargoType=WagonUnderUpdate.CargoType,
-                        Quantity= WagonUnderUpdate.Quantity,
-                        Locomotive_Id= WagonUnderUpdate.Locomotive_Id
+                        CargoType = WagonUnderUpdate.CargoType,
+                        Quantity = WagonUnderUpdate.Quantity,
+                        Locomotive_Id = WagonUnderUpdate.Locomotive_Id
                     }
                     );
                 });
@@ -238,10 +249,10 @@ namespace DYHVN3_HFT_2021221.WpfClient
                 {
                     Stations.Add(new Station()
                     {
-                        Name=StationUnderUpdate.Name,
+                        Name = StationUnderUpdate.Name,
                         x_cordinate = StationUnderUpdate.x_cordinate,
-                        y_cordinate= StationUnderUpdate.y_cordinate,
-                        Locomotive_Id=StationUnderUpdate.Locomotive_Id
+                        y_cordinate = StationUnderUpdate.y_cordinate,
+                        Locomotive_Id = StationUnderUpdate.Locomotive_Id
                     }
                     );
                 });
@@ -262,12 +273,59 @@ namespace DYHVN3_HFT_2021221.WpfClient
                 });
                 #endregion
 
+                #region nonCRUDCommands
+
+                rest = new RestService("http://localhost:38193");
+
+                nonCRUDOutput = new List<Locomotive>();
+
+                FastestTrain = new RelayCommand(() =>
+                {
+                    var l = rest.GetSingle<Locomotive>("train/fastestacceleratingtrain");
+                    List<Locomotive> h = new List<Locomotive>();
+                    h.Add(l);
+                    nonCRUDOutput = h;
+                }
+                );
+                LongestTrain = new RelayCommand(()=>
+                {
+                    var l = rest.GetSingle<Locomotive>("train/longesttrain");
+                    List<Locomotive> h = new List<Locomotive>();
+                    h.Add(l);
+                    nonCRUDOutput = h;
+                }
+                );
+                MostPowerfulLocomotive = new RelayCommand(()=>
+                {
+                    var l = rest.GetSingle<Locomotive>("train/mostpowerfullocomotive");
+                    List<Locomotive> h = new List<Locomotive>();
+                    h.Add(l);
+                    nonCRUDOutput = h;
+                }
+                );
+                WeakestLocomotive = new RelayCommand(()=>
+                {
+                    var l = rest.GetSingle<Locomotive>("train/weakestlocomotive");
+                    List<Locomotive> h = new List<Locomotive>();
+                    h.Add(l);
+                    nonCRUDOutput = h;
+                }
+                );
+                LocomotiveofStation = new RelayCommand(()=>
+                {
+                    Locomotive l = rest.Get<Locomotive>(selectedStation.Station_Id, "train/touchinglocomotive");
+                    List<Locomotive> h = new List<Locomotive>();
+                    h.Add(l);
+                    nonCRUDOutput = h;
+                }
+                );
+                #endregion
             }
 
             selectedLocomotive = new Locomotive();
             selectedWagon = new Wagon();
             selectedStation = new Station();
-        
+
         }
     }
 }
