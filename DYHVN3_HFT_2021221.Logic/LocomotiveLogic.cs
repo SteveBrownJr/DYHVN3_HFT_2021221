@@ -60,7 +60,7 @@ namespace DYHVN3_HFT_2021221.Logic
         }
         public void Update(Locomotive locomotive)
         {
-            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 4 || locomotive.Staff < 1)
+            if (locomotive.Name.Length < 4 || locomotive.Starting_Torque < 20 || locomotive.Type.Length < 3 || locomotive.Staff < 1)
                 throw new ArgumentOutOfRangeException();
             locomotiveRepo.Update(locomotive);
         }
@@ -93,8 +93,6 @@ namespace DYHVN3_HFT_2021221.Logic
         {
             return ReadAll().OrderBy(t => t.load / t.Starting_Torque).First();
         }
-
-
 
     }
 }

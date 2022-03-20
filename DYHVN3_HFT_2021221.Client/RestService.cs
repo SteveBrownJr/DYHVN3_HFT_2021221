@@ -10,7 +10,7 @@ namespace DYHVN3_HFT_2021221.Client
     class RestService
     {
         HttpClient client;
-
+        
         public RestService(string baseurl)
         {
             Init(baseurl);

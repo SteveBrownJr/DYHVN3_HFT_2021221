@@ -1,6 +1,7 @@
 ﻿using DYHVN3_HFT_2021221.Logic;
 using DYHVN3_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace DYHVN3_HFT_2021221.Endpoint.Controllers
     public class StationController : ControllerBase
     {
         IStationLogic Sl;
-        public StationController(IStationLogic Sl)
+        IHubContext<SignalRHub> hub;
+        public StationController(IStationLogic Sl, IHubContext<SignalRHub> hub)
         {
             this.Sl = Sl;
+            this.hub = hub;
         }
 
         // GET: api/<StationController>
@@ -38,6 +41,7 @@ namespace DYHVN3_HFT_2021221.Endpoint.Controllers
         public void Post([FromBody] Station value)
         {
             Sl.Create(value);
+            this.hub.Clients.All.SendAsync("StationCreated", value);
         }
 
         // PUT api/<StationController>/5
@@ -45,13 +49,16 @@ namespace DYHVN3_HFT_2021221.Endpoint.Controllers
         public void Put([FromBody] Station value)
         {
             Sl.Update(value);
+            this.hub.Clients.All.SendAsync("StationUpdated", value);
         }
 
         // DELETE api/<StationController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var StationToDelete = this.Sl.Read(id);
             Sl.Delete(id);
+            this.hub.Clients.All.SendAsync("StationDeleted", StationToDelete);
         }
     }
 }

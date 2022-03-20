@@ -51,11 +51,12 @@ namespace DYHVN3_HFT_2021221.Data
 
 
             List<Locomotive> locomotives = new List<Locomotive>();
-            locomotives.Add(new Locomotive() { Name = "Gunhild", Locomotive_Id = 1, Staff = 1, Type = "NoHab", Starting_Torque = 292 });
-            locomotives.Add(new Locomotive() { Name = "Fecske", Locomotive_Id = 2, Staff = 1, Type = "Szili", Starting_Torque = 270 }); 
-            locomotives.Add(new Locomotive() { Name = "Repce", Locomotive_Id = 3, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
-            locomotives.Add(new Locomotive() { Name = "Doremi", Locomotive_Id = 4, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
-            locomotives.Add(new Locomotive() { Name = "Kisleo", Locomotive_Id = 5, Staff = 3, Type = "V41", Starting_Torque = 230 });
+            locomotives.Add(new Locomotive() { Name = "Günhild", Locomotive_Id = 1, Staff = 1, Type = "NoHab", Starting_Torque = 292 });
+            locomotives.Add(new Locomotive() { Name = "Fecske", Locomotive_Id = 2, Staff = 1, Type = "V43", Starting_Torque = 270 }); 
+            locomotives.Add(new Locomotive() { Name = "Repcebika", Locomotive_Id = 3, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
+            locomotives.Add(new Locomotive() { Name = "Dórémí", Locomotive_Id = 4, Staff = 2, Type = "Taurus", Starting_Torque = 300 });
+            locomotives.Add(new Locomotive() { Name = "Kisleó", Locomotive_Id = 5, Staff = 3, Type = "V41", Starting_Torque = 230 });
+            locomotives.Add(new Locomotive() { Name = "Papagáj", Locomotive_Id = 6, Staff = 1, Type = "V43", Starting_Torque = 270 }); 
 
             List<Wagon> addable_wagons = new List<Wagon>() {
             new Wagon() { Locomotive_Id = 1, Quantity = 60, Wagon_Id = 1 },

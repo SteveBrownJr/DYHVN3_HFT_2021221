@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DYHVN3_HFT_2021221.Data\DYHVN3_HFT_2021221.Data.csproj" />
     <ProjectReference Include="..\DYHVN3_HFT_2021221.Logic\DYHVN3_HFT_2021221.Logic.csproj" />
     <ProjectReference Include="..\DYHVN3_HFT_2021221.Models\DYHVN3_HFT_2021221.Models.csproj" />
