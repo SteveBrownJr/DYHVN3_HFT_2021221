@@ -20,3 +20,30 @@ function display() {
         + "</td></tr>"
     });
 }
+
+function CreatLocomotive() {
+    let name = document.getElementById('locomotivename').value;
+    let type = document.getElementById('locomotivetype').value;
+    let startingtorque = document.getElementById('locomotivestartingtorque').value;
+    let staff = document.getElementById('locomotivestaff').value;
+    fetch('https://jsondatabase-7c304-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                name: name,
+                type: type,
+                starting_Torque: startingtorque,
+                staff: staff
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

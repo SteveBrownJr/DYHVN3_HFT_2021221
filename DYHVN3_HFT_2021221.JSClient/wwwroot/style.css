@@ -13,3 +13,14 @@ th,td{
 th{
     background-color: lightblue;
 }
+#locomotiveformdiv{
+    display:flex;
+    flex-direction:column;
+}
+#locomotiveformdiv,button,input{
+    margin:10px;
+    padding:5p;
+}
+#locomotiveformdiv label {
+    font-weight: bolder;
+}
