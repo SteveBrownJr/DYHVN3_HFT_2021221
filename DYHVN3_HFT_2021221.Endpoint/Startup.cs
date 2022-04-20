@@ -41,6 +41,12 @@ namespace DYHVN3_HFT_2021221.Endpoint
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(x => x
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:4293"));
+
             app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/ swagger / v1 / swagger.json", "DYHVN3_HFT_2021221.Endpoint v1"));
