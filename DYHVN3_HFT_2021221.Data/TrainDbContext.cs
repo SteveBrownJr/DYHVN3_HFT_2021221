@@ -113,7 +113,7 @@ namespace DYHVN3_HFT_2021221.Data
             new Station() { Station_Id = 7, Name = "Szolnok", x_cordinate = 30, y_cordinate = -60, Locomotive_Id = 4 },
             new Station() { Station_Id = 8, Name = "Szeged", x_cordinate = 20, y_cordinate = -90, Locomotive_Id = 4 },
 
-            new Station() { Station_Id = 9, Name = "Dunaujvaros", x_cordinate = 5, y_cordinate = -65, Locomotive_Id = 5 },
+            //new Station() { Station_Id = 9, Name = "Dunaujvaros", x_cordinate = 5, y_cordinate = -65, Locomotive_Id = 5 },
             };
 
             modelBuilder.Entity<Station>().HasData(addable_stations);
