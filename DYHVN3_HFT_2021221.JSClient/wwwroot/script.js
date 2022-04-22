@@ -1,16 +1,48 @@
 ﻿let locomotives = [];
-
+let connection = null;
 getdata();
 
+function setupSignalR() {
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:38193/hub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    connection.on("LocomotiveCreated", (user, message) => {
+        console.log(user);
+        console.log(message);
+        location.reload();
+    });
+    connection.on("LocomotiveDeleted", (user, message) => {
+        console.log(user);
+        console.log(message);
+        location.reload();
+    });
+    start();
+}
+
+async function start() {
+    try {
+        await connection.start();
+        console.log("SignalR Connected.");
+    } catch (err) {
+        console.log(err);
+        setTimeout(start, 5000);
+    }
+};
+
 async function getdata() {
+    setupSignalR()
     fetch('http://localhost:38193/Locomotive')
         .then(x => x.json())
         .then(y => {
             locomotives = y;
-            console.log(locomotives);
+            //console.log(locomotives);
             display();
         });
 }
+
+
 function display() {
     locomotives.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
