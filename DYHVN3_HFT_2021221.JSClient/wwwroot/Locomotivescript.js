@@ -1,5 +1,9 @@
 ﻿let locomotives = [];
 let connection = null;
+let mostpowerfultrain;
+let weakesttrain;
+let longesttrain;
+let voltmar;
 getdata();
 
 function setupSignalR() {
@@ -32,12 +36,33 @@ async function start() {
 };
 
 async function getdata() {
+    voltmar = false;
     setupSignalR()
+    fetch('http://localhost:38193/Train/LongestTrain/')
+        .then(x => x.json())
+        .then(y => {
+            longesttrain = y;
+            display2();
+        });
+
+    fetch('http://localhost:38193/Train/MostPowerFulLocomotive/')
+        .then(x => x.json())
+        .then(y => {
+            mostpowerfultrain = y;
+            display2();
+        });
+
+    fetch('http://localhost:38193/Train/WeakestLocomotive/')
+        .then(x => x.json())
+        .then(y => {
+            weakesttrain = y;
+            display2();
+        });
+
     fetch('http://localhost:38193/Locomotive')
         .then(x => x.json())
         .then(y => {
             locomotives = y;
-            //console.log(locomotives);
             display();
         });
 }
@@ -55,6 +80,21 @@ function display() {
         `<button type="button" onclick="RemoveLocomotive(${t.locomotive_Id})"> Delete </button>`
         + "</td></tr>"
     });
+}
+function display2() {
+    if (!voltmar) {
+    document.getElementById('noncrud').innerHTML=""
+    document.getElementById('noncrud').innerHTML +=
+        "<p>A legerősebb mozdony: Id:"
+        + mostpowerfultrain.locomotive_Id + " Név: " + mostpowerfultrain.name;
+    document.getElementById('noncrud').innerHTML +=
+        "<p>A leggyengébb mozdony: Id:"
+        + weakesttrain.locomotive_Id + " Név: " + weakesttrain.name;
+    document.getElementById('noncrud').innerHTML +=
+        "<p>A leghosszabb vonat: Id:"
+        + longesttrain.locomotive_Id + " Név: " + longesttrain.name;
+    }
+    voltmar = true;
 }
 
 function RemoveLocomotive(id) {

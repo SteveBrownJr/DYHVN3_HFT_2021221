@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Station UI</title>
+    <link rel="stylesheet" href="Stationstyle.css" />
+
+</head>
+<body>
+    <h1>Station Catalog</h1>
+    <div id="stationformdiv">
+        <label>Állomásnév</label>
+        <input type="text" id="stationname" />
+        <label>Mozdony Azonosító</label>
+        <input type="text" id="Locomotive_id" />
+        <label>X</label>
+        <input type="text" id="X" />
+        <label>Y</label>
+        <input type="text" id="Y" />
+
+        <button type="button" onclick="CreateStation()">Add Station</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Állomásazonosító
+                </th>
+                <th>
+                    Mozdonyid
+                </th>
+                <th>
+                    X
+                </th>
+                <th>
+                    Y
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="Stationscript.js"></script>
+</body>
+</html>
