@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Locomotive UI</title>
+    <link rel="stylesheet" href="Locomotivestyle.css"/>
+
+</head>
+<body>
+    <h1>Locomotive Catalog</h1>
+    <div id="locomotiveformdiv">
+        <label>Becenév</label>
+        <input type="text" id="locomotivename" />
+        <label>Típus</label>
+        <input type="text" id="locomotivetype" />
+        <label>Indító vonóerő</label>
+        <input type="text" id="locomotivestartingtorque" />
+        <label>Személyzet száma</label>
+        <input type="text" id="locomotivestaff" />
+
+        <button type="button" onclick="CreateLocomotive()">Add Locomotive</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Becenév
+                </th>
+                <th>
+                    Típus
+                </th>
+                <th>
+                    Személyzet száma
+                </th>
+                <th>
+                    Indító vonóerő
+                </th>
+                <th>
+                    Terhelés
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+    <div id="noncrud"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="Locomotivescript.js"></script>
+</body>
+</html>
