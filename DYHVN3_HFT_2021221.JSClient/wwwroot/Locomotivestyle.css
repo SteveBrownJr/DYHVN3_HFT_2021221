@@ -1,30 +1,53 @@
-﻿table{
+﻿table {
     width: 100%;
 }
-table, th, td{
+
+table, th, td {
     border: 1px solid black;
 }
-table{
-    border-collapse:collapse;
+
+table {
+    border-collapse: collapse;
 }
-th,td{
+
+th, td {
     padding: 5px;
 }
-th{
+
+th {
     background-color: lightblue;
 }
-#locomotiveformdiv{
-    display:flex;
-    flex-direction:column;
+
+#updatelocomotiveformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
-#locomotiveformdiv,button,input{
-    margin:10px;
-    padding:5px;
+
+#updatelocomotiveformdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
 }
+
+#updatelocomotiveformdiv label {
+    font-weight: bolder;
+}
+
+#locomotiveformdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#locomotiveformdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
 #locomotiveformdiv label {
     font-weight: bolder;
 }
-table button{
-    padding:2px;
 
+table button {
+    padding: 2px;
 }
