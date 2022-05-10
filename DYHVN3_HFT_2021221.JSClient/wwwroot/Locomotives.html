@@ -20,6 +20,18 @@
 
         <button type="button" onclick="CreateLocomotive()">Add Locomotive</button>
     </div>
+    <div id="Updatelocomotiveformdiv">
+        <label>Becenév</label>
+        <input type="text" id="locomotivenametoUpdate" />
+        <label>Típus</label>
+        <input type="text" id="locomotivetypetoUpdate" />
+        <label>Indító vonóerő</label>
+        <input type="text" id="locomotivestartingtorquetoUpdate" />
+        <label>Személyzet száma</label>
+        <input type="text" id="locomotivestafftoUpdate" />
+
+        <button type="button" onclick="Update()">Update Locomotive</button>
+    </div>
     <table>
         <thead>
             <tr>
@@ -49,7 +61,35 @@
         <tbody id="resultarea">
         </tbody>
     </table>
-    <div id="noncrud"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    NON-CRUD
+                </th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Becenév
+                </th>
+                <th>
+                    Típus
+                </th>
+                <th>
+                    Személyzet száma
+                </th>
+                <th>
+                    Indító vonóerő
+                </th>
+                <th>
+                    Terhelés
+                </th>
+            </tr>
+        </thead>
+        <tbody id="noncrud">
+        </tbody>
+    </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="Locomotivescript.js"></script>

@@ -24,6 +24,17 @@ th{
 #locomotiveformdiv label {
     font-weight: bolder;
 }
+#Updatelocomotiveformdiv{
+    display:none;
+    flex-direction:column;
+}
+#Updatelocomotiveformdiv, button, input {
+    margin: 10px;
+    padding: 5px;
+}
+#Updatelocomotiveformdiv label {
+    font-weight: bolder;
+}
 table button{
     padding:2px;
 

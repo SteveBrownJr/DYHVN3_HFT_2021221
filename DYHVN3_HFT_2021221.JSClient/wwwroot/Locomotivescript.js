@@ -4,6 +4,7 @@ let mostpowerfultrain;
 let weakesttrain;
 let longesttrain;
 let voltmar;
+let locomotiveIdToUpdate;
 getdata();
 
 function setupSignalR() {
@@ -18,6 +19,11 @@ function setupSignalR() {
         location.reload();
     });
     connection.on("LocomotiveDeleted", (user, message) => {
+        console.log(user);
+        console.log(message);
+        location.reload();
+    });
+    connection.on("LocomotiveUpdated", (user, message) => {
         console.log(user);
         console.log(message);
         location.reload();
@@ -77,24 +83,51 @@ function display() {
         + t.staff + " fő</td><td> "
         + t.starting_Torque + " kN </td><td> "
         + t.load + " tonna </td><td>" +
-        `<button type="button" onclick="RemoveLocomotive(${t.locomotive_Id})"> Delete </button>`
+        `<button type="button" onclick="RemoveLocomotive(${t.locomotive_Id})"> Delete </button> <button type="button" onclick="ShowUpdate(${t.locomotive_Id})"> Update </button>`
         + "</td></tr>"
     });
 }
+function ShowUpdate(id) {
+    document.getElementById('Updatelocomotiveformdiv').style.display = 'flex';
+    document.getElementById('locomotiveformdiv').style.display = 'none';
+
+    document.getElementById('locomotivenametoUpdate').value = locomotives.find(t => t['locomotive_Id'] == id)['name'];
+    document.getElementById('locomotivetypetoUpdate').value = locomotives.find(t => t['locomotive_Id'] == id)['type'];
+    document.getElementById('locomotivestafftoUpdate').value = locomotives.find(t => t['locomotive_Id'] == id)['staff'];
+    document.getElementById('locomotivestartingtorquetoUpdate').value = locomotives.find(t => t['locomotive_Id'] == id)['starting_Torque'];
+
+    locomotiveIdToUpdate = id;
+}
+
 function display2() {
-    if (!voltmar) {
-    document.getElementById('noncrud').innerHTML=""
+    document.getElementById('noncrud').innerHTML = "";
     document.getElementById('noncrud').innerHTML +=
-        "<p>A legerősebb mozdony: Id:"
-        + mostpowerfultrain.locomotive_Id + " Név: " + mostpowerfultrain.name;
+        "<tr><td> A legerősebb mozdony:" +
+        "<td>" + mostpowerfultrain.locomotive_Id + "</td><td>"
+    + mostpowerfultrain.name + "</td><td> "
+    + mostpowerfultrain.type + "</td><td> "
+    + mostpowerfultrain.staff + " fő</td><td> "
+    + mostpowerfultrain.starting_Torque + " kN </td><td> "
+    + mostpowerfultrain.load + " tonna </td>" +
+        "</tr>";
     document.getElementById('noncrud').innerHTML +=
-        "<p>A leggyengébb mozdony: Id:"
-        + weakesttrain.locomotive_Id + " Név: " + weakesttrain.name;
+        "<tr><td> A leggyengébb mozdony:" +
+        "<td>" + weakesttrain.locomotive_Id + "</td><td>"
+    + weakesttrain.name + "</td><td> "
+    + weakesttrain.type + "</td><td> "
+    + weakesttrain.staff + " fő</td><td> "
+    + weakesttrain.starting_Torque + " kN </td><td> "
+    + weakesttrain.load + " tonna </td>" +
+     "</tr>";
     document.getElementById('noncrud').innerHTML +=
-        "<p>A leghosszabb vonat: Id:"
-        + longesttrain.locomotive_Id + " Név: " + longesttrain.name;
-    }
-    voltmar = true;
+        "<tr><td> A leghosszabb szerelvény mozdonya:" +
+    "<td>" + longesttrain.locomotive_Id + "</td><td>"
+    + longesttrain.name + "</td><td> "
+    + longesttrain.type + "</td><td> "
+    + longesttrain.staff + " fő</td><td> "
+    + longesttrain.starting_Torque + " kN </td><td> "
+    + longesttrain.load + " tonna </td>" +
+     "</tr>";
 }
 
 function RemoveLocomotive(id) {
@@ -140,4 +173,35 @@ function CreateLocomotive() {
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+function Update() {
+    let lname = document.getElementById('locomotivenametoUpdate').value;
+    let ltype = document.getElementById('locomotivetypetoUpdate').value;
+    let lstartingtorque = document.getElementById('locomotivestartingtorquetoUpdate').value;
+    let lstaff = document.getElementById('locomotivestafftoUpdate').value;
+    fetch('http://localhost:38193/Locomotive', {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+                locomotive_Id: locomotiveIdToUpdate,
+                name: lname,
+                type: ltype,
+                starting_Torque: lstartingtorque,
+                staff: lstaff
+            }),
+        })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    document.getElementById('Updatelocomotiveformdiv').style.display = 'none';
+    document.getElementById('locomotiveformdiv').style.display = 'flex';
 }
